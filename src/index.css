@@ -30,3 +30,7 @@ code {
   background-color: rgba(0, 89, 255, 0.2);
   border-radius: 50%;
 }
+
+.error {
+  color: red;
+}

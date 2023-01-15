@@ -1,58 +1,35 @@
-import { Formik } from 'formik'
+/* eslint-disable max-len */
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik'
+import { SignInFormValidationSchema } from '../../validator'
+import '../../index.css'
 
 function SignIn() {
-  console.log()
+  const initialValues = {
+    email: '',
+    password: '',
+  }
 
   return (
-    <>
-      <h1>Войти</h1>
+    <div className="container d-flex flex-column align-items-center">
+      <h1 className="mb-5">Войти</h1>
       <Formik
-        initialValues={{ email: '', password: '' }}
-        validate={(values) => {
-          const errors = {}
-          if (!values.email) {
-            errors.email = 'Required'
-          } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-            errors.email = 'Invalid email address'
-          }
-          return errors
-        }}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            setSubmitting(false)
-          }, 400)
-        }}
+        initialValues={initialValues}
+        validationSchema={SignInFormValidationSchema}
+        onSubmit={(values) => console.log(values)}
       >
-        {({
-          values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting,
-          /* and other goodies */
-        }) => (
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
-            {errors.email && touched.email && errors.email}
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
-            {errors.password && touched.password && errors.password}
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
-          </form>
-        )}
-      </Formik>
+        <Form className="d-flex flex-column" style={{ width: '30%' }}>
+          <Field className="mb-3 form-control" name="email" type="email" placeholder="email here" />
+          <ErrorMessage component="p" className="error" name="email" />
 
-    </>
+          <Field className="mb-3 form-control" name="password" type="password" placeholder="password here" />
+          <ErrorMessage component="p" className="error" name="password" />
+
+          <button type="submit" className="btn btn-primary">Войти</button>
+        </Form>
+      </Formik>
+    </div>
   )
 }
 

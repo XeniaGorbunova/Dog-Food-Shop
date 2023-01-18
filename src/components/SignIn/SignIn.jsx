@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import {
   Formik, Form, Field, ErrorMessage,
@@ -51,6 +51,9 @@ function SignIn() {
           <button type="submit" disabled={isLoading} className="btn btn-primary">Войти</button>
         </Form>
       </Formik>
+      <Link to="/signup" className="btn btn-primary mt-5">
+        Регистрация
+      </Link>
     </div>
   )
 }

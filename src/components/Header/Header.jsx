@@ -12,7 +12,7 @@ function Header() {
         <img src={dog} alt="" />
       </Link>
       <h1>Dog Food</h1>
-      <NavLink to="/signup" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>
+      <NavLink to="/signin" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>
         <img src={dogFace} alt="" style={{ width: '70px', height: '70px' }} />
 
       </NavLink>

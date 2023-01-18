@@ -12,10 +12,12 @@ function Footer() {
         <img src={dog} alt="" />
       </Link>
       <h1>Dog Food</h1>
-      <NavLink to="/products" className={({ isActive }) => (isActive ? 'btn btn-info' : 'btn btn-primary')}>
-        Каталог
-
-      </NavLink>
+      <span>
+        <NavLink to="/products" className={({ isActive }) => (isActive ? 'btn btn-info' : 'btn btn-primary')}>
+          Каталог
+        </NavLink>
+        <button className="btn btn-info mx-3" type="button" onClick={() => localStorage.setItem('user_token', '')}>Выйти</button>
+      </span>
     </div>
   )
 }

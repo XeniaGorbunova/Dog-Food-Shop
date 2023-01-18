@@ -1,18 +1,28 @@
+/* eslint-disable no-unused-vars */
 import {
-  createContext, useContext, useEffect, setState,
+  createContext, useContext, useEffect, useState, useMemo,
 } from 'react'
 
 export const TokenContext = createContext()
 
 function TokenContextProvider({ children }) {
-  const [userToken, setUserToken] = setState('')
+  const [userToken, setUserToken] = useState(() => {
+    const tokenFromLs = localStorage.getItem('user_token')
+    return tokenFromLs
+  })
 
   useEffect(() => {
-    setUserToken(localStorage.getItem('user_token'))
+    localStorage.setItem('user_token', userToken)
   }, [userToken])
 
+  const setNewToken = (newToken) => setUserToken(newToken)
+
+  const tokenValues = useMemo(() => ({
+    userToken, setNewToken,
+  }), [])
+
   return (
-    <TokenContext.Provider value={userToken}>
+    <TokenContext.Provider value={tokenValues}>
       {children}
     </TokenContext.Provider>
   )

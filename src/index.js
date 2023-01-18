@@ -15,6 +15,7 @@ import Products from './components/Products/Products'
 import SignIn from './components/SignIn/SignIn'
 import SignUp from './components/SignUp/SignUp'
 import './index.css'
+import TokenContextProvider from './context/TokenContext'
 // import App from './App'
 
 const router = createBrowserRouter([
@@ -48,7 +49,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <TokenContextProvider>
+        <RouterProvider router={router} />
+      </TokenContextProvider>
     </QueryClientProvider>
   </React.StrictMode>,
 )

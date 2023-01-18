@@ -6,12 +6,15 @@ import {
 } from 'formik'
 import { SignInFormValidationSchema } from '../../validator'
 import '../../index.css'
+import { useTokenContext } from '../../context/TokenContext'
 
 function SignIn() {
   const initialValues = {
     email: '',
     password: '',
   }
+
+  const { setNewToken } = useTokenContext()
 
   const navigate = useNavigate()
 
@@ -22,7 +25,7 @@ function SignIn() {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(data),
-    }),
+    }).then((res) => res.json()).then((user) => setNewToken(user.token)),
   })
 
   const handleSubmit = async (values) => {

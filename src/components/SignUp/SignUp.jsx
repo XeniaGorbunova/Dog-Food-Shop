@@ -31,7 +31,6 @@ function SignUp() {
     navigate('/signin')
   }
 
-  console.log(mutateAsync)
   return (
     <>
       <h1>Регистрация</h1>

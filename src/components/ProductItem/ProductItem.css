@@ -1,0 +1,18 @@
+.product_card {
+  width: 18rem;
+  height: 22rem;
+  align-items: center;
+  background-color: rgb(246, 247, 248);
+}
+
+.card-body {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product_picture {
+  width: 10rem;
+  height: 10rem;
+}

@@ -20,7 +20,7 @@ function ProductsInner({ data }) {
             key={product._id}
             name={product.name}
             price={product.price}
-            stock={product.stock}
+            pictures={product.pictures}
           />
         ))}
       </ul>

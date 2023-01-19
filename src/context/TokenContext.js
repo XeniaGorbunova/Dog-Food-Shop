@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import {
-  createContext, useContext, useEffect, useState, useMemo,
+  createContext, useContext, useEffect, useState, useMemo, useCallback,
 } from 'react'
 
 export const TokenContext = createContext()
@@ -15,10 +15,12 @@ function TokenContextProvider({ children }) {
     localStorage.setItem('user_token', userToken)
   }, [userToken, setUserToken])
 
-  const setNewToken = (newToken) => setUserToken(newToken)
+  const setNewToken = useCallback((newToken) => setUserToken(newToken), [setUserToken])
+
+  const removeToken = useCallback(() => setUserToken(''), [setUserToken])
 
   const tokenValues = useMemo(() => ({
-    userToken, setNewToken,
+    userToken, setNewToken, removeToken,
   }), [])
 
   return (

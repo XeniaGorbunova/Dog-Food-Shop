@@ -2,9 +2,10 @@
 import { Link, NavLink } from 'react-router-dom'
 import dog from '../../assets/dog.png'
 import '../../index.css'
+import { useTokenContext } from '../../context/TokenContext'
 
 function Footer() {
-  console.log()
+  const { removeToken } = useTokenContext()
 
   return (
     <div className="p-3 header_footer">
@@ -16,7 +17,7 @@ function Footer() {
         <NavLink to="/products" className={({ isActive }) => (isActive ? 'btn btn-info' : 'btn btn-primary')}>
           Каталог
         </NavLink>
-        <button className="btn btn-info mx-3" type="button" onClick={() => localStorage.setItem('user_token', '')}>Выйти</button>
+        <button className="btn btn-info mx-3" type="button" onClick={() => removeToken()}>Выйти</button>
       </span>
     </div>
   )

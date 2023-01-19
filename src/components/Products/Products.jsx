@@ -14,7 +14,7 @@ function ProductsInner({ data }) {
     <>
       <h1>Products</h1>
       {products && (
-      <ul className="list-group">
+      <ul className="d-flex p-2 flex-wrap align-items-center justify-content-around">
         {products.map((product) => (
           <ProductItem
             key={product._id}

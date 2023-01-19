@@ -1,14 +1,16 @@
+/* eslint-disable max-len */
 function ProductItem({
-  name, stock, pictures, price,
+  name, pictures, price,
 }) {
   return (
-    <li className="list-group-item d-flex justify-content-between align-items-center">
-      <img src={pictures} alt="product" />
-      <p>{name}</p>
-      <b>{price}</b>
-      <p>{stock}</p>
+    <li className="card m-2" style={{ width: '18rem', height: '22rem' }}>
+      <img src={{ pictures }} className="card-img-top" alt="product" />
+      <div className="card-body">
+        <h5 className="card-title">{name}</h5>
+        <p className="card-text">{price}</p>
+        <button type="button" className="btn btn-primary">В корзину</button>
+      </div>
     </li>
-
   )
 }
 

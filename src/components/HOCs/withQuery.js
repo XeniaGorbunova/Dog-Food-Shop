@@ -7,13 +7,13 @@ const withQuery = (WrappedComponent) => function ({
   if (isLoading === true) return <Loader />
   if (isError === true) {
     return (
-      <div className="d-flex justify-content-center">
+      <div className="d-flex flex-column align-items-center justify-content-center">
         <p>
           Error happend:
           {' '}
           {error.message}
         </p>
-        <button type="button" className="btn tbn-primary" onClick={refetch}>
+        <button type="button" className="btn btn-primary mx-3" onClick={refetch}>
           Повторить
         </button>
       </div>

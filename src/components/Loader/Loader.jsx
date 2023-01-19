@@ -1,6 +1,8 @@
+import LoaderStyles from './Loader.module.css'
+
 function Loader() {
   return (
-    <div className="lds-default">
+    <div className={LoaderStyles['lds-default']}>
       <div />
       <div />
       <div />

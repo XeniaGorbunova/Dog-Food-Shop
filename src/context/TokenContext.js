@@ -13,7 +13,7 @@ function TokenContextProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('user_token', userToken)
-  }, [userToken])
+  }, [userToken, setUserToken])
 
   const setNewToken = (newToken) => setUserToken(newToken)
 

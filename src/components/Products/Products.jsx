@@ -1,15 +1,46 @@
+/* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-// import { useEffect } from 'react'
 import { useTokenContext } from '../../context/TokenContext'
-import ProductItem from '../ProductItem/ProductItenm'
+import ProductItem from '../ProductItem/ProductItem'
+import withQuery from '../HOCs/withQuery'
+
+function ProductsInner({ data }) {
+  const { products } = data
+  return (
+
+    <>
+      <h1>Products</h1>
+      {products && (
+      <ul className="list-group">
+        {products.map((product) => (
+          <ProductItem
+            key={product._id}
+            name={product.name}
+            price={product.price}
+            stock={product.stock}
+          />
+        ))}
+      </ul>
+      )}
+
+    </>
+
+  )
+}
+const ProductsInnerWithQuery = withQuery(ProductsInner)
 
 function Products() {
   const { userToken } = useTokenContext()
   const navigate = useNavigate()
 
-  if (!userToken) navigate('/signin')
+  useEffect(() => {
+    if (!userToken) {
+      navigate('/signin')
+    }
+  }, [userToken])
 
   console.log({ userToken })
   const {
@@ -20,31 +51,20 @@ function Products() {
       headers: {
         authorization: `Bearer ${userToken}`,
       },
-    }).then((res) => res.json()),
+    })
+      .then((res) => {
+        if (res.status >= 400) {
+          throw new Error(`${res.status}: Произошла ошибка при получении информации о товарах. Попробуйте сделать запрос позже.`)
+        }
+        return res.json()
+      }),
+    enabled: (userToken !== undefined) && (userToken !== ''),
   })
   console.log({
     data, isLoading, isError, error, refetch,
   })
 
-  return (
-
-    <>
-      <h1>Products</h1>
-      <ul className="list-group">
-        {data.products.map((product) => (
-          <ProductItem
-            key={product._id}
-            name={product.name}
-            price={product.price}
-            stock={product.stock}
-
-          />
-        ))}
-      </ul>
-
-    </>
-
-  )
+  return <ProductsInnerWithQuery data={data} isLoading={isLoading} isError={isError} refetch={refetch} error={error} />
 }
 
 export default Products

@@ -1,4 +1,5 @@
 body {
+  overflow-x: hidden;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -20,6 +21,7 @@ code {
   background-color: rgb(245, 243, 243);
   border-bottom: 1px solid grey;
   border-top: 1px solid grey;
+
 }
 
 .container_100 {

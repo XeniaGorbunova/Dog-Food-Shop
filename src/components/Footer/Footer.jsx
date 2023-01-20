@@ -8,16 +8,16 @@ function Footer() {
   const { removeToken } = useTokenContext()
 
   return (
-    <div className="p-3 header_footer">
+    <div className="p-3 position-sticky bottom-0 start-0 header_footer">
       <Link to="/">
         <img src={dog} alt="" />
       </Link>
       <h1>Dog Food</h1>
       <span>
-        <NavLink to="/products" className={({ isActive }) => (isActive ? 'btn btn-info' : 'btn btn-primary')}>
+        <NavLink to="/products" className={({ isActive }) => (isActive ? 'btn mx-1 btn-info' : 'btn mx-1 btn-primary')}>
           Каталог
         </NavLink>
-        <button className="btn btn-info mx-3" type="button" onClick={() => removeToken()}>Выйти</button>
+        <button className="btn btn-info mx-2" type="button" onClick={() => removeToken()}>Выйти</button>
       </span>
     </div>
   )

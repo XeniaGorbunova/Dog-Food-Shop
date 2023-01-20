@@ -35,14 +35,13 @@ const ProductsInnerWithQuery = withQuery(ProductsInner)
 function Products() {
   const { userToken } = useTokenContext()
   const navigate = useNavigate()
-
+  console.log({ userToken })
   useEffect(() => {
     if (!userToken) {
       navigate('/signin')
     }
   }, [userToken])
 
-  console.log({ userToken })
   const {
     data, isLoading, isError, error, refetch,
   } = useQuery({

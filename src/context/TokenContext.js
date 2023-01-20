@@ -13,7 +13,7 @@ function TokenContextProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('user_token', userToken)
-  }, [userToken, setUserToken])
+  }, [userToken])
 
   const setNewToken = useCallback((newToken) => setUserToken(newToken), [setUserToken])
 
@@ -21,7 +21,7 @@ function TokenContextProvider({ children }) {
 
   const tokenValues = useMemo(() => ({
     userToken, setNewToken, removeToken,
-  }), [])
+  }), [userToken])
 
   return (
     <TokenContext.Provider value={tokenValues}>

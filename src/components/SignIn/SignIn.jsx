@@ -30,7 +30,7 @@ function SignIn() {
 
   const handleSubmit = async (values) => {
     await mutateAsync(values)
-    navigate('/products')
+    setTimeout(() => { navigate('/products') })
   }
 
   return (

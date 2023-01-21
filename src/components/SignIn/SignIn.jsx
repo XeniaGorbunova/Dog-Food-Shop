@@ -7,6 +7,7 @@ import {
 import { SignInFormValidationSchema } from '../../validator'
 import '../../index.css'
 import { useTokenContext } from '../../context/TokenContext'
+import { DogFoodApiConst } from '../../api/DogFoodapi'
 
 function SignIn() {
   const initialValues = {
@@ -19,13 +20,8 @@ function SignIn() {
   const navigate = useNavigate()
 
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: (data) => fetch('https://api.react-learning.ru/signin', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }).then((res) => res.json()).then((user) => setNewToken(user.token)),
+    mutationFn: (values) => DogFoodApiConst.SignIn(values)
+      .then((user) => setNewToken(user.token)),
   })
 
   const handleSubmit = async (values) => {

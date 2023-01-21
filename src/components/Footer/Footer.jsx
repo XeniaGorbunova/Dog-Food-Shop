@@ -5,7 +5,7 @@ import '../../index.css'
 import { useTokenContext } from '../../context/TokenContext'
 
 function Footer() {
-  const { removeToken } = useTokenContext()
+  const { removeToken, userToken } = useTokenContext()
 
   return (
     <div className="p-3 position-sticky bottom-0 start-0 header_footer">
@@ -17,7 +17,7 @@ function Footer() {
         <NavLink to="/products" className={({ isActive }) => (isActive ? 'btn mx-1 btn-info' : 'btn mx-1 btn-primary')}>
           Каталог
         </NavLink>
-        <button className="btn btn-info mx-2" type="button" onClick={() => removeToken()}>Выйти</button>
+        <button className={userToken ? 'btn btn-info mx-2' : 'btn btn-light mx-2'} type="button" onClick={() => removeToken()}>Выйти</button>
       </span>
     </div>
   )

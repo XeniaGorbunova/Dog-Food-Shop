@@ -2,6 +2,7 @@
 import {
   createContext, useContext, useEffect, useState, useMemo, useCallback,
 } from 'react'
+import { DogFoodApiConst } from '../api/DogFoodapi'
 
 export const TokenContext = createContext()
 
@@ -13,6 +14,7 @@ function TokenContextProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem('user_token', userToken)
+    DogFoodApiConst.setToken(userToken)
   }, [userToken])
 
   const setNewToken = useCallback((newToken) => setUserToken(newToken), [setUserToken])

@@ -20,7 +20,7 @@ function SignIn() {
   const navigate = useNavigate()
 
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: (values) => DogFoodApiConst.SignIn(values)
+    mutationFn: (values) => DogFoodApiConst.signIn(values)
       .then((user) => setNewToken(user.token)),
   })
 

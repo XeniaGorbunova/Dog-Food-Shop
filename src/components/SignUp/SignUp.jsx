@@ -6,6 +6,7 @@ import {
 } from 'formik'
 import { SignUpFormValidationSchema } from '../../validator'
 import '../../index.css'
+import { DogFoodApiConst } from '../../api/DogFoodapi'
 
 function SignUp() {
   const initialValues = {
@@ -17,13 +18,7 @@ function SignUp() {
   const navigate = useNavigate()
 
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: (data) => fetch('https://api.react-learning.ru/signup', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }),
+    mutationFn: (data) => DogFoodApiConst.signUp(data),
   })
 
   const handleSubmit = async (values) => {

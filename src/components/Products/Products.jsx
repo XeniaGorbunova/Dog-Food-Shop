@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useTokenContext } from '../../context/TokenContext'
 import ProductItem from '../ProductItem/ProductItem'
 import withQuery from '../HOCs/withQuery'
+import { DogFoodApiConst } from '../../api/DogFoodapi'
 
 function ProductsInner({ data }) {
   const { products } = data
@@ -46,7 +47,8 @@ function Products() {
     data, isLoading, isError, error, refetch,
   } = useQuery({
     queryKey: ['productsfetch'],
-    queryFn: () => fetch('https://api.react-learning.ru/products', {
+    queryFn: () => DogFoodApiConst.getAllProducts(),
+    /*   fetch('https://api.react-learning.ru/products', {
       headers: {
         authorization: `Bearer ${userToken}`,
       },
@@ -56,7 +58,7 @@ function Products() {
           throw new Error(`${res.status}: Произошла ошибка при получении информации о товарах. Попробуйте сделать запрос позже.`)
         }
         return res.json()
-      }),
+      }),   */
     enabled: (userToken !== undefined) && (userToken !== ''),
   })
   console.log({

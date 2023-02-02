@@ -1,7 +1,9 @@
+/* eslint-disable max-len */
 import { Link, NavLink } from 'react-router-dom'
 import '../../index.css'
 import dogFace from '../../assets/dogFace.svg'
 import dog from '../../assets/dog.png'
+import cart from '../../assets/cart.svg'
 
 function Header() {
   console.log()
@@ -12,10 +14,16 @@ function Header() {
         <img src={dog} alt="" />
       </Link>
       <h1>Dog Food</h1>
-      <NavLink to="/signin" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>
-        <img src={dogFace} alt="" style={{ width: '70px', height: '70px' }} />
+      <div className="d-flex align-items-center justify-content-center">
+        <NavLink to="/signin" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>
+          <img src={dogFace} alt="" style={{ width: '70px', height: '70px' }} />
 
-      </NavLink>
+        </NavLink>
+        <NavLink to="/cart" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>
+          <img src={cart} alt="" style={{ width: '70px', height: '70px', padding: '10px' }} />
+
+        </NavLink>
+      </div>
     </div>
   )
 }

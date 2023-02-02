@@ -29,6 +29,11 @@ code {
 }
 
 .active_link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
   background-color: rgba(0, 89, 255, 0.2);
   border-radius: 50%;
 }

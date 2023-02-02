@@ -16,6 +16,7 @@ import SignIn from './components/SignIn/SignIn'
 import SignUp from './components/SignUp/SignUp'
 import './index.css'
 import TokenContextProvider from './context/TokenContext'
+import Cart from './components/Cart/Cart'
 // import App from './App'
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <Products />,
+      },
+      {
+        path: '/cart',
+        element: <Cart />,
       },
     ],
   },

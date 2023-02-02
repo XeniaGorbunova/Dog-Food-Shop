@@ -7,6 +7,7 @@ import { useTokenContext } from '../../context/TokenContext'
 import ProductItem from '../ProductItem/ProductItem'
 import withQuery from '../HOCs/withQuery'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
+import Search from '../Search/Search'
 
 function ProductsInner({ data }) {
   const { products } = data
@@ -14,6 +15,7 @@ function ProductsInner({ data }) {
 
     <>
       <h1>Products</h1>
+      <Search />
       {products && (
       <ul className="d-flex p-2 flex-wrap align-items-center justify-content-around">
         {products.map((product) => (
@@ -48,17 +50,6 @@ function Products() {
   } = useQuery({
     queryKey: ['productsfetch'],
     queryFn: () => DogFoodApiConst.getAllProducts(),
-    /*   fetch('https://api.react-learning.ru/products', {
-      headers: {
-        authorization: `Bearer ${userToken}`,
-      },
-    })
-      .then((res) => {
-        if (res.status >= 400) {
-          throw new Error(`${res.status}: Произошла ошибка при получении информации о товарах. Попробуйте сделать запрос позже.`)
-        }
-        return res.json()
-      }),   */
     enabled: (userToken !== undefined) && (userToken !== ''),
   })
   console.log({

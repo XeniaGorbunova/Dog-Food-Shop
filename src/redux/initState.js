@@ -10,7 +10,7 @@ export const initState = {
     {
       id: '',
       count: 1,
-      isChecked: false,
+      isPicked: false,
     },
   ],
 }

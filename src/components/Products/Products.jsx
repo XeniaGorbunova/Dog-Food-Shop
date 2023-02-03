@@ -12,8 +12,7 @@ import { getSearchSelector } from '../../redux/slices/filterSlice'
 import { getQueryKey } from './utils'
 
 function ProductsInner({ data }) {
-  const { products } = data
-  // console.log(products)
+  const products = data
   return (
 
     <>

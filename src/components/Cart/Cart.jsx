@@ -30,10 +30,10 @@ function Cart() {
       {cartProducts[0] && (
         <>
           <ul className="d-flex p-2 flex-wrap align-items-center justify-content-around">
-            {cartProducts.map(({ _id: id, ...item }) => (
+            {cartProducts.map((item) => (
               <CartItem
-                key={id}
-                id={id}
+                key={item.id}
+                id={item.id}
                 name={item.name}
                 price={item.price}
                 pictures={item.pictures}

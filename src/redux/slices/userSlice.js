@@ -5,7 +5,22 @@ const userSlice = createSlice({
   name: 'user',
   initialState: initState.user,
   reducers: {
+    setUser: {
+      reducer(state, action) {
+        console.log(state, action)
+      },
+      prepare(id, token, name, email) {
+        return {
+          payload: {
+            id,
+            token,
+            name,
+            email,
+          },
 
+        }
+      },
+    },
   },
 })
 

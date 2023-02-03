@@ -8,6 +8,7 @@ function CartItem({
 }) {
   const dispatch = useDispatch()
   const deleteProductHandler = () => {
+    console.log(id)
     dispatch(deleteProduct(id))
   }
   return (

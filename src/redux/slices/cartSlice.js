@@ -10,6 +10,7 @@ const cartSlice = createSlice({
       if (currentProduct) currentProduct.isPicked = !currentProduct.isPicked
     },
     deleteProduct(state, action) {
+      console.log({ action })
       return state.filter((product) => product.id !== action.payload)
     },
     clearCart() {

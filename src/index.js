@@ -12,13 +12,13 @@ import {
 } from '@tanstack/react-query'
 import App from './App'
 import Main from './components/Main/Main'
-import Products from './components/Products/Products'
 import SignIn from './components/SignIn/SignIn'
 import SignUp from './components/SignUp/SignUp'
 import './index.css'
 import TokenContextProvider from './context/TokenContext'
 import Cart from './components/Cart/Cart'
 import { store } from './redux/store'
+import Cathalog from './components/Cathalog/Cathalog'
 // import App from './App'
 
 const router = createBrowserRouter([
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/products',
-        element: <Products />,
+        element: <Cathalog />,
       },
       {
         path: '/cart',

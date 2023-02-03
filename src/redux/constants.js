@@ -1,1 +1,1 @@
-export const TOKEN_LS_KEY = 'TOKEN_LS_KEY'
+export const DOGFOOD_LS_KEY = 'DOGFOOD_LS_KEY'

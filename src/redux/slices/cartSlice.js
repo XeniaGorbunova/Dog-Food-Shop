@@ -5,7 +5,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: initState.cart,
   reducers: {
-    pickProduct(state, action) {
+    changeIsPickProduct(state, action) {
       const currentProduct = state.find((product) => product.id === action.payload)
       if (currentProduct) currentProduct.isPicked = !currentProduct.isPicked
     },
@@ -16,7 +16,8 @@ const cartSlice = createSlice({
       return []
     },
     addNewProduct(state, action) {
-      state.unshift(action.payload)
+      const currentProduct = state.find((product) => product.id === action.payload.id)
+      if (!currentProduct) state.unshift(action.payload)
     },
     getCartQuantity(state) {
       return state.length
@@ -25,7 +26,7 @@ const cartSlice = createSlice({
 })
 
 export const {
-  pickProduct, deleteProduct, clearCart, addNewProduct, getCartQuantity,
+  changeIsPickProduct, deleteProduct, clearCart, addNewProduct, getCartQuantity,
 } = cartSlice.actions
 export const getAllCartProductsSelector = (state) => state.cart
 export const cartReducer = cartSlice.reducer

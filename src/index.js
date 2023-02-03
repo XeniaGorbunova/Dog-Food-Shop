@@ -5,6 +5,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
+import { Provider } from 'react-redux/es/exports'
 import {
   QueryClient,
   QueryClientProvider,
@@ -17,6 +18,7 @@ import SignUp from './components/SignUp/SignUp'
 import './index.css'
 import TokenContextProvider from './context/TokenContext'
 import Cart from './components/Cart/Cart'
+import { store } from './redux/store'
 // import App from './App'
 
 const router = createBrowserRouter([
@@ -59,10 +61,12 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <TokenContextProvider>
-        <RouterProvider router={router} />
-      </TokenContextProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <TokenContextProvider>
+          <RouterProvider router={router} />
+        </TokenContextProvider>
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>,
 )

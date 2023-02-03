@@ -21,6 +21,7 @@ function ProductsInner({ data }) {
         {products.map((product) => (
           <ProductItem
             key={product._id}
+            id={product._id}
             name={product.name}
             price={product.price}
             pictures={product.pictures}

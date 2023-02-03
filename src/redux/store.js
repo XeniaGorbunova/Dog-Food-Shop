@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { TOKEN_LS_KEY } from './constants'
-import { initState } from './initState'
+import { DOGFOOD_LS_KEY } from './constants'
+import { getInitState } from './initState'
 import { rootReducer } from './rootReducer'
 
 export const store = configureStore({
   reducer: rootReducer,
-  preloadedState: initState,
+  preloadedState: getInitState(),
 
 })
 
-store.subscribe(() => window.localStorage.setItem(TOKEN_LS_KEY, JSON.stringify(store.getState())))
+store.subscribe(() => window.localStorage.setItem(DOGFOOD_LS_KEY, JSON.stringify(store.getState())))

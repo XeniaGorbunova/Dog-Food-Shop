@@ -8,3 +8,6 @@ const userSlice = createSlice({
 
   },
 })
+
+export const getUserSelector = (state) => state.user
+export const userReducer = userSlice.reducer

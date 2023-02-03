@@ -3,7 +3,6 @@ import { DOGFOOD_LS_KEY } from './constants'
 export const initState = {
   user: {
     group: '',
-    name: '',
     email: '',
     token: '',
   },

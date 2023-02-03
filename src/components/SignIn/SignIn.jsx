@@ -1,27 +1,31 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { useMutation } from '@tanstack/react-query'
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
 import { SignInFormValidationSchema } from '../../validator'
 import '../../index.css'
-import { useTokenContext } from '../../context/TokenContext'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
+
+import { setNewUser } from '../../redux/slices/userSlice'
 
 function SignIn() {
   const initialValues = {
     email: '',
     password: '',
   }
-
-  const { setNewToken } = useTokenContext()
+  const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (values) => DogFoodApiConst.signIn(values)
-      .then((user) => setNewToken(user.token)),
+      .then((user) => {
+        dispatch(setNewUser(user.data._id, user.token, user.data.email))
+      }),
   })
 
   const handleSubmit = async (values) => {

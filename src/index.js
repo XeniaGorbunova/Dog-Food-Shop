@@ -15,7 +15,6 @@ import Main from './components/Main/Main'
 import SignIn from './components/SignIn/SignIn'
 import SignUp from './components/SignUp/SignUp'
 import './index.css'
-import TokenContextProvider from './context/TokenContext'
 import Cart from './components/Cart/Cart'
 import { store } from './redux/store'
 import Cathalog from './components/Cathalog/Cathalog'
@@ -63,11 +62,9 @@ root.render(
   <React.StrictMode>
 
     <QueryClientProvider client={queryClient}>
-      <TokenContextProvider>
-        <Provider store={store}>
-          <RouterProvider router={router} />
-        </Provider>
-      </TokenContextProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </QueryClientProvider>
 
   </React.StrictMode>,

@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 import { initState } from '../initState'
 
@@ -5,24 +7,27 @@ const userSlice = createSlice({
   name: 'user',
   initialState: initState.user,
   reducers: {
-    setUser: {
+    setNewUser: {
       reducer(state, action) {
-        console.log(state, action)
+        if (state.email !== action.payload.email) return action.payload
       },
-      prepare(id, token, name, email) {
+      prepare(id, token, email) {
         return {
           payload: {
             id,
             token,
-            name,
             email,
           },
 
         }
       },
     },
+    logOut() {
+      return initState.user
+    },
   },
 })
-
+export const { setNewUser, logOut } = userSlice.actions
 export const getUserSelector = (state) => state.user
+export const getTokenSelector = (state) => state.user.token
 export const userReducer = userSlice.reducer

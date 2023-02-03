@@ -8,14 +8,7 @@ function ProductItem({
 }) {
   const dispatch = useDispatch()
   const moveToCartHandler = () => {
-    dispatch(addNewProduct({
-      id,
-      count: 1,
-      isPicked: false,
-      name,
-      price,
-      pictures,
-    }))
+    dispatch(addNewProduct(id))
   }
   return (
     <li className="card m-2 product_card p-2">

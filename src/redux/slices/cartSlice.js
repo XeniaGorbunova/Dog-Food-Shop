@@ -15,18 +15,27 @@ const cartSlice = createSlice({
     clearCart() {
       return []
     },
-    addNewProduct(state, action) {
-      const currentProduct = state.find((product) => product.id === action.payload.id)
-      if (!currentProduct) state.unshift(action.payload)
-    },
-    getCartQuantity(state) {
-      return state.length
+    addNewProduct: {
+      reducer(state, action) {
+        const currentProduct = state.find((product) => product.id === action.payload.id)
+        if (!currentProduct) state.unshift(action.payload)
+      },
+      prepare(id) {
+        return {
+          payload: {
+            id,
+            isChecked: false,
+            count: 1,
+          },
+
+        }
+      },
     },
   },
 })
 
 export const {
-  changeIsPickProduct, deleteProduct, clearCart, addNewProduct, getCartQuantity,
+  changeIsPickProduct, deleteProduct, clearCart, addNewProduct,
 } = cartSlice.actions
 export const getAllCartProductsSelector = (state) => state.cart
 export const cartReducer = cartSlice.reducer

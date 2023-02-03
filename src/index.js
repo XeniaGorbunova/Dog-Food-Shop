@@ -61,12 +61,14 @@ const queryClient = new QueryClient({
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <TokenContextProvider>
+
+    <QueryClientProvider client={queryClient}>
+      <TokenContextProvider>
+        <Provider store={store}>
           <RouterProvider router={router} />
-        </TokenContextProvider>
-      </QueryClientProvider>
-    </Provider>
+        </Provider>
+      </TokenContextProvider>
+    </QueryClientProvider>
+
   </React.StrictMode>,
 )

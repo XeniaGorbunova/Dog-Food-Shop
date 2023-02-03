@@ -8,13 +8,10 @@ export const initState = {
     token: '',
   },
   products: [],
-  cart: [
-    // {
-    //   id: '',
-    //   count: 1,
-    //   isPicked: false,
-    // },
-  ],
+  cart: [],
+  filter: {
+    search: '',
+  },
 }
 
 export const getInitState = () => {

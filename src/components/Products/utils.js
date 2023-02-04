@@ -1,1 +1,2 @@
-export const getQueryKey = (search) => ['productsfetch', search]
+export const getQuerySearchKey = (search) => ['productsfetch', search]
+export const getQueryCartKey = (cart) => ['cart', cart]

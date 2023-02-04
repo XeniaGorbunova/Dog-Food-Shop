@@ -4,12 +4,11 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
-// import { useTokenContext } from '../../context/TokenContext'
 import ProductItem from '../ProductItem/ProductItem'
 import withQuery from '../HOCs/withQuery'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import { getSearchSelector } from '../../redux/slices/filterSlice'
-import { getQueryKey } from './utils'
+import { getQuerySearchKey } from './utils'
 import { getTokenSelector } from '../../redux/slices/userSlice'
 
 function ProductsInner({ data }) {
@@ -49,11 +48,10 @@ function Products() {
   }, [userToken])
 
   const search = useSelector(getSearchSelector)
-  DogFoodApiConst.setToken(userToken)
   const {
     data, isLoading, isError, error, refetch,
   } = useQuery({
-    queryKey: getQueryKey(search),
+    queryKey: getQuerySearchKey(search),
     queryFn: () => DogFoodApiConst.getAllProducts(search),
     enabled: (userToken !== undefined) && (userToken !== ''),
   })

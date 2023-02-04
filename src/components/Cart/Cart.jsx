@@ -9,16 +9,16 @@ import CartItem from '../CartItem/CartItem'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import { getTokenSelector } from '../../redux/slices/userSlice'
 import Loader from '../Loader/Loader'
+import { getQueryCartKey } from '../Products/utils'
 
 function Cart() {
   const cart = useSelector(getAllCartProductsSelector)
   const userToken = useSelector(getTokenSelector)
-  DogFoodApiConst.setToken(userToken)
   const dispatch = useDispatch()
   const {
     data: cartProducts, isLoading, isError, error,
   } = useQuery({
-    queryKey: ['cart'],
+    queryKey: [getQueryCartKey(cart)],
     queryFn: () => DogFoodApiConst.getProductsByIds(cart.map((product) => product.id)),
     enabled: (userToken !== undefined) && (userToken !== ''),
   })

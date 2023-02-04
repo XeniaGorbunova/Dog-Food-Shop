@@ -39,6 +39,15 @@ class DogFoodApi {
     return response.json()
   }
 
+  getProductsByIds(ids) {
+    this.checkToken()
+    return Promise.all(ids.map((id) => fetch(`${this.baseUrl}/products/${id}`, {
+      headers: {
+        authorization: this.getAuthorizationToken(),
+      },
+    }).then((res) => res.json())))
+  }
+
   async getAllProducts(search) {
     this.checkToken()
     const response = await fetch(`${this.baseUrl}/products/search?query=${search}`, {

@@ -17,6 +17,7 @@ import { getQueryCartKey } from '../Products/utils'
 function Cart() {
   const cart = useSelector(getAllCartProductsSelector)
   const userToken = useSelector(getTokenSelector)
+  DogFoodApiConst.setToken(userToken)
   const dispatch = useDispatch()
   const {
     data: cartProducts, isLoading, isError, error,
@@ -56,7 +57,7 @@ function Cart() {
     return updatedSum
   }, 0)
   if (isLoading) return <Loader />
-  if (isError) return <p>{`Error: ${error} `}</p>
+  if (isError) return <p>{`${error} `}</p>
 
   return (
     <div style={{ width: '100%' }}>

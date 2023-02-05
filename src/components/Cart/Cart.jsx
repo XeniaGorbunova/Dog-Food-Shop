@@ -60,7 +60,6 @@ function Cart() {
             </div>
             <ul
               className="d-flex flex-column gap-3 p-2  align-items-start justify-content-start"
-              // style={{ width: '100%' }}
             >
               {cartProducts.map((item) => (
                 <CartItem

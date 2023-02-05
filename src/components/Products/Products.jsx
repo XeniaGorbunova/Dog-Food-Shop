@@ -15,7 +15,7 @@ function ProductsInner({ data }) {
   const products = data
   return (
     <div>
-      {products && (
+      {products[0] && (
       <ul className="d-flex p-2 flex-wrap align-items-center justify-content-around">
         {products.map((product) => (
           <ProductItem
@@ -28,7 +28,7 @@ function ProductsInner({ data }) {
         ))}
       </ul>
       )}
-      {!products[0] && (
+      {!products[0] && products && (
       <h5 className="card-header">По вашему запросу ничего не найдено</h5>
       )}
     </div>

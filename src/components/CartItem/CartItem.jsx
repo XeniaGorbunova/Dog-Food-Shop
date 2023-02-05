@@ -1,22 +1,24 @@
 /* eslint-disable max-len */
 import './CartItem.css'
 import { useDispatch } from 'react-redux'
-import { deleteProduct } from '../../redux/slices/cartSlice'
+import { changeIsPickProduct, deleteProduct } from '../../redux/slices/cartSlice'
 import minus from '../../assets/minus.svg'
 import plus from '../../assets/plus.svg'
 
 function CartItem({
-  name, pictures, price, id, description, stock, discount,
+  name, pictures, price, id, description, stock, discount, isPicked,
 }) {
   const dispatch = useDispatch()
   const deleteProductHandler = () => {
-    console.log(id)
     dispatch(deleteProduct(id))
+  }
+  const selectProductHandler = () => {
+    dispatch(changeIsPickProduct(id))
   }
   return (
     <li className="card" style={{ width: '100%' }}>
       <h5 className="card-header">
-        <input type="checkbox" style={{ marginRight: '10px' }} />
+        <input type="checkbox" checked={isPicked} style={{ marginRight: '10px' }} onClick={selectProductHandler} />
         {name}
       </h5>
       <div className="card-body">

@@ -10,9 +10,15 @@ const cartSlice = createSlice({
       if (currentProduct) currentProduct.isPicked = !currentProduct.isPicked
     },
     pickAllProducts(state) {
-      state.map((product) => ({
+      return state.map((product) => ({
         ...product,
         isPicked: true,
+      }))
+    },
+    notPickAllProducts(state) {
+      return state.map((product) => ({
+        ...product,
+        isPicked: false,
       }))
     },
     getProductById(state, action) {
@@ -22,7 +28,7 @@ const cartSlice = createSlice({
       return state.filter((product) => product.isPicked === true)
     },
     productIncrement(state, action) {
-      state.map((product) => {
+      return state.map((product) => {
         if (product.id === action.payload) {
           return {
             ...product,
@@ -33,7 +39,7 @@ const cartSlice = createSlice({
       })
     },
     productDecrement(state, action) {
-      state.map((product) => {
+      return state.map((product) => {
         if (product.id === action.payload) {
           return {
             ...product,
@@ -44,7 +50,6 @@ const cartSlice = createSlice({
       })
     },
     deleteProduct(state, action) {
-      console.log({ action })
       return state.filter((product) => product.id !== action.payload)
     },
     clearCart() {
@@ -70,7 +75,7 @@ const cartSlice = createSlice({
 })
 
 export const {
-  changeIsPickProduct, deleteProduct, clearCart, addNewProduct,
+  changeIsPickProduct, deleteProduct, clearCart, addNewProduct, notPickAllProducts,
   productDecrement, productIncrement, getAllPickedProducts, getProductById, pickAllProducts,
 } = cartSlice.actions
 export const getAllCartProductsSelector = (state) => state.cart

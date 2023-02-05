@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import '../../index.css'
-import { clearCart, getAllCartProductsSelector } from '../../redux/slices/cartSlice'
+import {
+  clearCart, getAllCartProductsSelector, notPickAllProducts, pickAllProducts,
+} from '../../redux/slices/cartSlice'
 import CartItem from '../CartItem/CartItem'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import { getTokenSelector } from '../../redux/slices/userSlice'
@@ -19,13 +21,18 @@ function Cart() {
   const {
     data: cartProducts, isLoading, isError, error,
   } = useQuery({
-    queryKey: [getQueryCartKey(cart)],
+    queryKey: [getQueryCartKey(cart.length)],
     queryFn: () => DogFoodApiConst.getProductsByIds(cart.map((product) => product.id)),
     enabled: (userToken !== undefined) && (userToken !== ''),
   })
   console.log(cartProducts)
   const clearCartHandler = () => {
     dispatch(clearCart())
+  }
+  const isAllCardPicked = () => cart.filter((item) => item.isPicked === true).length === cart.length
+  const pickAllProductsHandler = () => {
+    if (!isAllCardPicked()) dispatch(pickAllProducts())
+    else dispatch(notPickAllProducts())
   }
 
   if (isLoading) return <Loader />
@@ -51,7 +58,7 @@ function Cart() {
           >
             <div className="d-flex p-4 flex-row gap-2 align-items-center  justify-content-between">
               <span className="d-flex flex-row gap-2">
-                <input id="select_all" type="checkbox" />
+                <input id="select_all" type="checkbox" checked={isAllCardPicked()} onChange={pickAllProductsHandler} />
                 <label htmlFor="select_all">Выбрать все</label>
               </span>
               <button type="button" className="btn btn-primary mt-4" onClick={clearCartHandler}>
@@ -71,6 +78,8 @@ function Cart() {
                   stock={item.stock}
                   discount={item.discount}
                   description={item.description}
+                  isPicked={cart.find((product) => product.id === item._id).isPicked}
+                  count={cart.find((product) => product.id === item._id).count}
                 />
               ))}
             </ul>

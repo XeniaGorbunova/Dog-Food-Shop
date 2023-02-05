@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 import { useDispatch, useSelector } from 'react-redux'
@@ -30,7 +31,7 @@ function Cart() {
   if (isLoading) return <Loader />
   if (isError) return <p>{`Error: ${error} `}</p>
   return (
-    <div className="d-flex align-items-center justify-content-center flex-column">
+    <div>
       {!cart[0] && (
       <div className="d-flex align-items-center justify-content-center flex-column">
         <h1>Ваша корзина пуста</h1>
@@ -43,23 +44,46 @@ function Cart() {
       )}
 
       {cartProducts[0] && (
-        <>
-          <ul className="d-flex p-2 flex-wrap align-items-center justify-content-around">
-            {cartProducts.map((item) => (
-              <CartItem
-                key={item._id}
-                id={item._id}
-                name={item.name}
-                price={item.price}
-                pictures={item.pictures}
-              />
-            ))}
-          </ul>
-          <button type="button" className="btn btn-primary mt-4" onClick={clearCartHandler}>
-            Очистить
-          </button>
-
-        </>
+        <div className="d-flex flex-row justify-content-between">
+          <div
+            className="d-flex p-2 flex-column"
+            style={{ width: '70%' }}
+          >
+            <div className="d-flex p-4 flex-row gap-2 align-items-center  justify-content-between">
+              <span className="d-flex flex-row gap-2">
+                <input id="select_all" type="checkbox" />
+                <label htmlFor="select_all">Выбрать все</label>
+              </span>
+              <button type="button" className="btn btn-primary mt-4" onClick={clearCartHandler}>
+                Очистить
+              </button>
+            </div>
+            <ul
+              className="d-flex flex-column gap-3 p-2  align-items-start justify-content-start"
+              // style={{ width: '100%' }}
+            >
+              {cartProducts.map((item) => (
+                <CartItem
+                  key={item._id}
+                  id={item._id}
+                  name={item.name}
+                  price={item.price}
+                  pictures={item.pictures}
+                  stock={item.stock}
+                  discount={item.discount}
+                  description={item.description}
+                />
+              ))}
+            </ul>
+          </div>
+          <div style={{ width: '30%' }}>
+            <p>Информация о заказе</p>
+            <p>Сумма</p>
+            <button type="button" className="btn btn-primary mt-4" onClick={clearCartHandler}>
+              Оформить
+            </button>
+          </div>
+        </div>
       )}
     </div>
   )

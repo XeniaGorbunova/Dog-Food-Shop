@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { Link, NavLink } from 'react-router-dom'
 import '../../index.css'
+import './Header.css'
 import { useSelector } from 'react-redux'
 import dogFace from '../../assets/dogFace.svg'
 import dog from '../../assets/dog.png'
@@ -8,7 +9,6 @@ import cart from '../../assets/cart.svg'
 import { getAllCartProductsSelector } from '../../redux/slices/cartSlice'
 
 function Header() {
-  console.log()
   const cartProducts = useSelector(getAllCartProductsSelector)
   return (
     <div className="p-3 header_footer">
@@ -22,8 +22,16 @@ function Header() {
 
         </NavLink>
         <NavLink to="/cart" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>
-          <img src={cart} alt="" style={{ width: '70px', height: '70px', padding: '10px' }} />
-          {cartProducts.length}
+          <img
+            src={cart}
+            alt=""
+            style={{
+              width: '70px', height: '70px', padding: '10px', position: 'relative',
+            }}
+          />
+          <span className="cart__number">
+            {cartProducts.length}
+          </span>
         </NavLink>
       </div>
     </div>

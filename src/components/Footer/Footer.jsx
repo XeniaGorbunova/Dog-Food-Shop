@@ -10,7 +10,7 @@ function Footer() {
   const dispatch = useDispatch()
   const handleLogOut = () => dispatch(logOut())
   return (
-    <div className="p-3 position-sticky bottom-0 start-0 header_footer">
+    <div className="p-3 position-fixed bottom-0 start-0 header_footer">
       <Link to="/">
         <img src={dog} alt="" />
       </Link>

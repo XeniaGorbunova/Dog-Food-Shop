@@ -1,0 +1,10 @@
+.cart__number {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: white;
+  text-decoration: none;
+  font-size: 35px;
+  font-weight: 800;
+  -webkit-text-stroke: 1px black;
+}

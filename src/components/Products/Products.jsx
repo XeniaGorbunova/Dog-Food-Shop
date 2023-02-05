@@ -14,9 +14,7 @@ import { getTokenSelector } from '../../redux/slices/userSlice'
 function ProductsInner({ data }) {
   const products = data
   return (
-
-    <>
-      <h1>Products</h1>
+    <div>
       {products && (
       <ul className="d-flex p-2 flex-wrap align-items-center justify-content-around">
         {products.map((product) => (
@@ -30,8 +28,10 @@ function ProductsInner({ data }) {
         ))}
       </ul>
       )}
-
-    </>
+      {!products[0] && (
+      <h5 className="card-header">По вашему запросу ничего не найдено</h5>
+      )}
+    </div>
 
   )
 }

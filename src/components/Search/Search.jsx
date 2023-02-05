@@ -20,8 +20,8 @@ function Search() {
     <input
       placeholder="Поиск"
       type="text"
-      className="form-control m-3"
-      style={{ width: '60%' }}
+      className="form-control"
+      style={{ width: '500px', margin: '24px auto' }}
       value={search}
       onChange={searchHandler}
     />

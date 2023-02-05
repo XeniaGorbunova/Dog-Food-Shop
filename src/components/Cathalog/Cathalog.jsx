@@ -5,10 +5,10 @@ function Cathalog() {
   console.log()
 
   return (
-    <>
+    <div style={{ position: 'absolute', top: '120px' }}>
       <Search />
       <Products />
-    </>
+    </div>
   )
 }
 

@@ -30,13 +30,26 @@ function Cart() {
     dispatch(clearCart())
   }
   const isAllCardPicked = () => cart.filter((item) => item.isPicked === true).length === cart.length
+  const getCartProductById = (idItem) => cart.find((product) => product.id === idItem)
   const pickAllProductsHandler = () => {
     if (!isAllCardPicked()) dispatch(pickAllProducts())
     else dispatch(notPickAllProducts())
   }
-
+  const calculateSum = () => cartProducts.reduce((sum, product) => {
+    const updatedSum = sum + product.price * getCartProductById(product._id).count
+    return updatedSum
+  }, 0)
+  const calculateDiscount = () => cartProducts.reduce((sum, product) => {
+    const updatedSum = sum + product.price * getCartProductById(product._id).count * (product.discount / 100)
+    return updatedSum
+  }, 0)
+  const calculateSumWithDiscount = () => cartProducts.reduce((sum, product) => {
+    const updatedSum = sum + product.price * getCartProductById(product._id).count * ((100 - product.discount) / 100)
+    return updatedSum
+  }, 0)
   if (isLoading) return <Loader />
   if (isError) return <p>{`Error: ${error} `}</p>
+
   return (
     <div style={{ width: '100%' }}>
       {!cart[0] && (
@@ -89,19 +102,24 @@ function Cart() {
             <p>
               Сумма:
               {' '}
-              {cartProducts.reduce((sum, product) => {
-                const updatedSum = sum + product.price
-                return updatedSum
-              }, 0)}
+              {calculateSum()}
               {' '}
               ₽
             </p>
             <p>
               Скидка:
               {' '}
+              {calculateDiscount()}
+              {' '}
               ₽
             </p>
-            <h5>К оплате:</h5>
+            <h5>
+              К оплате:
+              {' '}
+              {calculateSumWithDiscount()}
+              {' '}
+              ₽
+            </h5>
             <button type="button" className="btn btn-primary mt-4">
               Оформить
             </button>

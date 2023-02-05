@@ -22,7 +22,7 @@ const cartSlice = createSlice({
       }))
     },
     getProductById(state, action) {
-      return state.find((product) => product.id === action.payload)
+      state.find((product) => product.id === action.payload)
     },
     getAllPickedProducts(state) {
       return state.filter((product) => product.isPicked === true)

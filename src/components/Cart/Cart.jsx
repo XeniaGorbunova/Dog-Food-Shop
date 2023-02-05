@@ -30,6 +30,13 @@ function Cart() {
     dispatch(clearCart())
   }
   const isAllCardPicked = () => cart.filter((item) => item.isPicked === true).length === cart.length
+  // const findAllPickedProducts = () => {
+  //   const allPickedProducts = []
+  //   cart.forEach((item) => {
+  //     if (item.isPicked === true) allPickedProducts.push(item)
+  //   })
+  //   return allPickedProducts
+  // }
   const getCartProductById = (idItem) => cart.find((product) => product.id === idItem)
   const pickAllProductsHandler = () => {
     if (!isAllCardPicked()) dispatch(pickAllProducts())
@@ -102,21 +109,21 @@ function Cart() {
             <p>
               Сумма:
               {' '}
-              {calculateSum()}
+              {calculateSum() || 0}
               {' '}
               ₽
             </p>
             <p>
               Скидка:
               {' '}
-              {calculateDiscount()}
+              {calculateDiscount() || 0}
               {' '}
               ₽
             </p>
             <h5>
               К оплате:
               {' '}
-              {calculateSumWithDiscount()}
+              {calculateSumWithDiscount() || 0}
               {' '}
               ₽
             </h5>

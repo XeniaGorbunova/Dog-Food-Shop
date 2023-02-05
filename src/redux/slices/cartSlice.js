@@ -21,12 +21,12 @@ const cartSlice = createSlice({
         isPicked: false,
       }))
     },
-    getProductById(state, action) {
-      state.find((product) => product.id === action.payload)
-    },
-    getAllPickedProducts(state) {
-      return state.filter((product) => product.isPicked === true)
-    },
+    // getProductById(state, action) {
+    //   state.find((product) => product.id === action.payload)
+    // },
+    // getAllPickedProducts(state) {
+    //   return state.filter((product) => product.isPicked === true)
+    // },
     productIncrement(state, action) {
       return state.map((product) => {
         if (product.id === action.payload) {
@@ -64,7 +64,7 @@ const cartSlice = createSlice({
         return {
           payload: {
             id,
-            isPicked: false,
+            isPicked: true,
             count: 1,
           },
 

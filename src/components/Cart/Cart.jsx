@@ -31,9 +31,9 @@ function Cart() {
   if (isLoading) return <Loader />
   if (isError) return <p>{`Error: ${error} `}</p>
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       {!cart[0] && (
-      <div className="d-flex align-items-center justify-content-center flex-column">
+      <div className="d-flex align-items-center justify-content-center flex-column mt-5">
         <h1>Ваша корзина пуста</h1>
         <Link to="/products">
           <button type="button" className="btn btn-primary mt-4">
@@ -44,7 +44,7 @@ function Cart() {
       )}
 
       {cartProducts[0] && (
-        <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row justify-content-between" style={{ width: '100%', marginBottom: '100px' }}>
           <div
             className="d-flex p-2 flex-column"
             style={{ width: '70%' }}
@@ -76,10 +76,25 @@ function Cart() {
               ))}
             </ul>
           </div>
-          <div style={{ width: '30%' }}>
-            <p>Информация о заказе</p>
-            <p>Сумма</p>
-            <button type="button" className="btn btn-primary mt-4" onClick={clearCartHandler}>
+          <div style={{ width: '30%' }} className="d-flex flex-column gap-3 m-3">
+            <h5>Информация о заказе:</h5>
+            <p>
+              Сумма:
+              {' '}
+              {cartProducts.reduce((sum, product) => {
+                const updatedSum = sum + product.price
+                return updatedSum
+              }, 0)}
+              {' '}
+              ₽
+            </p>
+            <p>
+              Скидка:
+              {' '}
+              ₽
+            </p>
+            <h5>К оплате:</h5>
+            <button type="button" className="btn btn-primary mt-4">
               Оформить
             </button>
           </div>

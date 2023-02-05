@@ -34,7 +34,7 @@ function SignIn() {
   }
 
   return (
-    <div className="container d-flex flex-column align-items-center">
+    <div className="container d-flex flex-column align-items-center mt-5">
       <h1 className="mb-5">Войти</h1>
       <Formik
         initialValues={initialValues}

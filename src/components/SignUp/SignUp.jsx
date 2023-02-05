@@ -28,7 +28,7 @@ function SignUp() {
 
   return (
     <>
-      <h1>Регистрация</h1>
+      <h1 className="mt-5">Регистрация</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={SignUpFormValidationSchema}

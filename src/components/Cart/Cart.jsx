@@ -30,28 +30,29 @@ function Cart() {
     dispatch(clearCart())
   }
   const isAllCardPicked = () => cart.filter((item) => item.isPicked === true).length === cart.length
-  // const findAllPickedProducts = () => {
-  //   const allPickedProducts = []
-  //   cart.forEach((item) => {
-  //     if (item.isPicked === true) allPickedProducts.push(item)
-  //   })
-  //   return allPickedProducts
-  // }
-  const getCartProductById = (idItem) => cart.find((product) => product.id === idItem)
+  const findAllPickedProducts = () => {
+    const allPickedProducts = []
+    cart.forEach((item) => {
+      if (item.isPicked === true) allPickedProducts.push(item)
+    })
+    return allPickedProducts
+  }
+
+  const getCartProductById = (idItem) => cartProducts.find((product) => product._id === idItem)
   const pickAllProductsHandler = () => {
     if (!isAllCardPicked()) dispatch(pickAllProducts())
     else dispatch(notPickAllProducts())
   }
-  const calculateSum = () => cartProducts.reduce((sum, product) => {
-    const updatedSum = sum + product.price * getCartProductById(product._id).count
+  const calculateSum = () => findAllPickedProducts().reduce((sum, product) => {
+    const updatedSum = sum + product.count * getCartProductById(product.id).price
     return updatedSum
   }, 0)
-  const calculateDiscount = () => cartProducts.reduce((sum, product) => {
-    const updatedSum = sum + product.price * getCartProductById(product._id).count * (product.discount / 100)
+  const calculateDiscount = () => findAllPickedProducts().reduce((sum, product) => {
+    const updatedSum = sum + product.count * getCartProductById(product.id).price * (getCartProductById(product.id).discount / 100)
     return updatedSum
   }, 0)
-  const calculateSumWithDiscount = () => cartProducts.reduce((sum, product) => {
-    const updatedSum = sum + product.price * getCartProductById(product._id).count * ((100 - product.discount) / 100)
+  const calculateSumWithDiscount = () => findAllPickedProducts().reduce((sum, product) => {
+    const updatedSum = sum + product.count * getCartProductById(product.id).price * ((100 - getCartProductById(product.id).discount) / 100)
     return updatedSum
   }, 0)
   if (isLoading) return <Loader />

@@ -40,6 +40,7 @@ function Cart() {
   }
 
   const getCartProductById = (idItem) => cartProducts.find((product) => product._id === idItem)
+  const getCartStateProductById = (idItem) => cart.find((product) => product.id === idItem)
   const pickAllProductsHandler = () => {
     if (!isAllCardPicked()) dispatch(pickAllProducts())
     else dispatch(notPickAllProducts())
@@ -100,8 +101,8 @@ function Cart() {
                   stock={item.stock}
                   discount={item.discount}
                   description={item.description}
-                  isPicked={cart.find((product) => product.id === item._id).isPicked}
-                  count={cart.find((product) => product.id === item._id).count}
+                  isPicked={getCartStateProductById(item._id).isPicked}
+                  count={getCartStateProductById(item._id).count}
                 />
               ))}
             </ul>

@@ -20,10 +20,10 @@ function CartItem({
     dispatch(changeIsPickProduct(id))
   }
   const incrementCountHandler = () => {
-    dispatch(productIncrement(id))
+    if (count < stock) { dispatch(productIncrement(id)) }
   }
   const decrementCountHandler = () => {
-    dispatch(productDecrement(id))
+    if (count > 0) { dispatch(productDecrement(id)) }
   }
   console.log({ count })
   return (

@@ -17,7 +17,6 @@ import { getQueryCartKey } from '../Products/utils'
 function Cart() {
   const cart = useSelector(getAllCartProductsSelector)
   const userToken = useSelector(getTokenSelector)
-  DogFoodApiConst.setToken(userToken)
   const dispatch = useDispatch()
   const {
     data: cartProducts, isLoading, isError, error,

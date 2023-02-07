@@ -7,6 +7,7 @@ import {
 import { SignUpFormValidationSchema } from '../../validator'
 import '../../index.css'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
+import Loader from '../Loader/Loader'
 
 function SignUp() {
   const initialValues = {
@@ -17,7 +18,9 @@ function SignUp() {
 
   const navigate = useNavigate()
 
-  const { mutateAsync, isLoading } = useMutation({
+  const {
+    mutateAsync, isLoading, isError, error,
+  } = useMutation({
     mutationFn: (data) => DogFoodApiConst.signUp(data),
   })
 
@@ -25,6 +28,8 @@ function SignUp() {
     await mutateAsync(values)
     navigate('/signin')
   }
+  if (isLoading) return <Loader />
+  if (isError) return <p>{`${error} `}</p>
 
   return (
     <>

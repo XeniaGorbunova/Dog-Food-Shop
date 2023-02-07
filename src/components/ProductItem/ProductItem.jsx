@@ -9,7 +9,7 @@ function ProductItem({
   name, pictures, price, id,
 }) {
   const cartProducts = useSelector(getAllCartProductsSelector)
-  console.log(cartProducts)
+
   const dispatch = useDispatch()
   const moveToCartHandler = () => {
     dispatch(addNewProduct(id))

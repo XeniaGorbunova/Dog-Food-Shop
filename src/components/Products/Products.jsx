@@ -55,7 +55,7 @@ function Products() {
     queryFn: () => DogFoodApiConst.getAllProducts(search),
     enabled: (userToken !== undefined) && (userToken !== ''),
   })
-  console.log({ data })
+  console.log({ data, key: getQuerySearchKey(search) })
 
   return <ProductsInnerWithQuery data={data} isLoading={isLoading} isError={isError} refetch={refetch} error={error} />
 }

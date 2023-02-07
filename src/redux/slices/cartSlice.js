@@ -21,12 +21,6 @@ const cartSlice = createSlice({
         isPicked: false,
       }))
     },
-    // getProductById(state, action) {
-    //   state.find((product) => product.id === action.payload)
-    // },
-    // getAllPickedProducts(state) {
-    //   return state.filter((product) => product.isPicked === true)
-    // },
     productIncrement(state, action) {
       return state.map((product) => {
         if (product.id === action.payload) {
@@ -76,7 +70,7 @@ const cartSlice = createSlice({
 
 export const {
   changeIsPickProduct, deleteProduct, clearCart, addNewProduct, notPickAllProducts,
-  productDecrement, productIncrement, getAllPickedProducts, getProductById, pickAllProducts,
+  productDecrement, productIncrement, pickAllProducts,
 } = cartSlice.actions
 export const getAllCartProductsSelector = (state) => state.cart
 export const cartReducer = cartSlice.reducer

@@ -52,7 +52,7 @@ function Products() {
     data, isLoading, isError, error, refetch,
   } = useQuery({
     queryKey: getQuerySearchKey(search),
-    queryFn: () => DogFoodApiConst.getAllProducts(search),
+    queryFn: () => DogFoodApiConst.getAllProducts(search, userToken),
     enabled: (userToken !== undefined) && (userToken !== ''),
   })
   console.log({ data, key: getQuerySearchKey(search) })

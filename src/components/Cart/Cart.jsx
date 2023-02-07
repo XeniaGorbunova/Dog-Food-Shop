@@ -22,7 +22,7 @@ function Cart() {
     data: cartProducts, isLoading, isError, error,
   } = useQuery({
     queryKey: [getQueryCartKey(cart.length)],
-    queryFn: () => DogFoodApiConst.getProductsByIds(cart.map((product) => product.id)),
+    queryFn: () => DogFoodApiConst.getProductsByIds(cart.map((product) => product.id), userToken),
     enabled: (userToken !== undefined) && (userToken !== ''),
   })
   console.log(cartProducts)

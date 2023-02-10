@@ -53,7 +53,7 @@ function Products() {
   } = useQuery({
     queryKey: getQuerySearchKey(search),
     queryFn: () => DogFoodApiConst.getAllProducts(search, userToken),
-    enabled: (userToken !== undefined) && (userToken !== ''),
+    enabled: !!(userToken),
   })
   console.log({ data, key: getQuerySearchKey(search) })
 

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import dog from '../../assets/dog.png'
 import '../../index.css'
 import { getTokenSelector, logOut } from '../../redux/slices/userSlice'
@@ -8,7 +8,11 @@ import { getTokenSelector, logOut } from '../../redux/slices/userSlice'
 function Footer() {
   const userToken = useSelector(getTokenSelector)
   const dispatch = useDispatch()
-  const handleLogOut = () => dispatch(logOut())
+  const navigate = useNavigate()
+  const handleLogOut = () => {
+    dispatch(logOut())
+    navigate('/signin')
+  }
   return (
     <div className="p-3 position-fixed bottom-0 start-0 header_footer">
       <Link to="/">

@@ -46,15 +46,15 @@ function Cart() {
   }
   const calculateSum = () => findAllPickedProducts().reduce((sum, product) => {
     const updatedSum = sum + product.count * getCartProductById(product.id).price
-    return updatedSum
+    return Math.ceil(updatedSum)
   }, 0)
   const calculateDiscount = () => findAllPickedProducts().reduce((sum, product) => {
     const updatedSum = sum + product.count * getCartProductById(product.id).price * (getCartProductById(product.id).discount / 100)
-    return updatedSum
+    return Math.ceil(updatedSum)
   }, 0)
   const calculateSumWithDiscount = () => findAllPickedProducts().reduce((sum, product) => {
     const updatedSum = sum + product.count * getCartProductById(product.id).price * ((100 - getCartProductById(product.id).discount) / 100)
-    return updatedSum
+    return Math.ceil(updatedSum)
   }, 0)
   if (isLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>

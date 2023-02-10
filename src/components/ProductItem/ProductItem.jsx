@@ -23,7 +23,11 @@ function ProductItem({
       <img src={pictures} className="card-img-top product_picture" alt="product" />
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
-        <p className="card-text">{price}</p>
+        <p className="card-text">
+          {price}
+          {' '}
+          ₽
+        </p>
         <button type="button" className="btn btn-primary" onClick={isInCart(id) ? removeFromCartHandler : moveToCartHandler}>
           {isInCart(id) ? (
             <img className="card__icon" src={done} alt="done" />

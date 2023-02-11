@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import dog from '../../assets/dog.png'
 import '../../index.css'
+import { clearCart } from '../../redux/slices/cartSlice'
 import { getTokenSelector, logOut } from '../../redux/slices/userSlice'
 
 function Footer() {
@@ -11,6 +12,7 @@ function Footer() {
   const navigate = useNavigate()
   const handleLogOut = () => {
     dispatch(logOut())
+    dispatch(clearCart())
     navigate('/signin')
   }
   return (

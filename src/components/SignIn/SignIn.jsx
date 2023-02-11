@@ -11,6 +11,8 @@ import '../../index.css'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 
 import { setNewUser } from '../../redux/slices/userSlice'
+import { DOGFOOD_CART_LS_KEY } from '../../redux/constants'
+import { cartInitialize } from '../../redux/slices/cartSlice'
 
 function SignIn() {
   const initialValues = {
@@ -24,6 +26,11 @@ function SignIn() {
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (values) => DogFoodApiConst.signIn(values)
       .then((user) => {
+        const cartFromLS = window.localStorage.getItem(DOGFOOD_CART_LS_KEY)
+        if (cartFromLS) {
+          const cartForCurrentUser = JSON.parse(cartFromLS)[user.data._id]
+          dispatch(cartInitialize(cartForCurrentUser ?? []))
+        }
         dispatch(setNewUser(user.data._id, user.token, user.data.email))
       }),
   })

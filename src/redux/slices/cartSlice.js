@@ -5,6 +5,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState: initState.cart,
   reducers: {
+    cartInitialize(state, action) {
+      return action.payload
+    },
     changeIsPickProduct(state, action) {
       const currentProduct = state.find((product) => product.id === action.payload)
       if (currentProduct) currentProduct.isPicked = !currentProduct.isPicked
@@ -70,7 +73,7 @@ const cartSlice = createSlice({
 
 export const {
   changeIsPickProduct, deleteProduct, clearCart, addNewProduct, notPickAllProducts,
-  productDecrement, productIncrement, pickAllProducts,
+  productDecrement, productIncrement, pickAllProducts, cartInitialize,
 } = cartSlice.actions
 export const getAllCartProductsSelector = (state) => state.cart
 export const cartReducer = cartSlice.reducer

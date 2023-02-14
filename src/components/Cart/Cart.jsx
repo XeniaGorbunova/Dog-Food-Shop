@@ -100,8 +100,8 @@ function Cart() {
                   stock={item.stock}
                   discount={item.discount}
                   description={item.description}
-                  isPicked={getCartStateProductById(item._id).isPicked}
-                  count={getCartStateProductById(item._id).count}
+                  isPicked={getCartStateProductById(item._id)?.isPicked}
+                  count={getCartStateProductById(item._id)?.count}
                 />
               ))}
             </ul>

@@ -5,7 +5,34 @@
 import { keyboard } from '@testing-library/user-event/dist/keyboard'
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import styles from './Modal.module.css'
+
+const modalWrVariants = {
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren',
+    },
+  },
+  visable: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+    },
+  },
+}
+
+const modalContentVariants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  visable: {
+    opacity: 1,
+    y: 0,
+  },
+}
 
 const ModalInner = ({ closeHandler, children }) => {
   const closeModalByEscape = (e) => {
@@ -19,25 +46,35 @@ const ModalInner = ({ closeHandler, children }) => {
   }, [])
 
   return (
-    <div className={styles.modalInner}>
+    <motion.div className={styles.modalInner} variants={modalContentVariants}>
       {children}
-    </div>
+    </motion.div>
   )
 }
 
 const Modal = ({ isOpen, closeHandler, children }) => {
-  if (!isOpen) return null
+  const renderContent = () => {
+    if (!isOpen) return null
+    const closeModalByClickHandler = (e) => {
+      if (e.target === e.currentTarget) closeHandler()
+    }
 
-  const closeModalByClickHandler = (e) => {
-    if (e.target === e.currentTarget) closeHandler()
+    return (
+      <motion.div
+        variants={modalWrVariants}
+        initial="hidden"
+        animate="visable"
+        exit="hidden"
+        onClick={closeModalByClickHandler}
+        className={styles.modalWr}
+      >
+        <ModalInner closeHandler={closeHandler}>{children}</ModalInner>
+      </motion.div>
+    )
   }
 
   return createPortal(
-    <div onClick={closeModalByClickHandler} className={styles.modalWr}>
-      <ModalInner closeHandler={closeHandler}>
-        {children}
-      </ModalInner>
-    </div>,
+    <AnimatePresence>{renderContent()}</AnimatePresence>,
     document.getElementById('modal-root'),
   )
 }

@@ -16,7 +16,7 @@ const DeleteItemModal = ({
   return (
     <Modal isOpen={isOpen} closeHandler={closeDeleteModalHandler}>
       <p>
-        Are you sure? Delete this task?
+        Вы уверены что хотите удалить этот товар из корзины?
       </p>
       {' '}
       <b>

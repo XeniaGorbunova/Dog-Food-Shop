@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import './Main.css'
 
 function Main() {
@@ -7,11 +8,20 @@ function Main() {
   return (
     <div className="picture">
       <div className="opacity">
-        <h1>Лакомства для счастливых собак</h1>
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 1,
+          }}
+          className="mb-5"
+        >
+          Лакомства для счастливых собак
+        </motion.h1>
         <Link to="/products">
-          <button type="button" className="btn btn-primary mt-4">
+          <motion.button type="button" className="btn btn-primary mt-4">
             перейти к покупкам
-          </button>
+          </motion.button>
 
         </Link>
       </div>

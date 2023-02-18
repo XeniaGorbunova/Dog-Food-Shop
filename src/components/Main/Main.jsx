@@ -9,8 +9,8 @@ function Main() {
     <div className="picture">
       <div className="opacity">
         <motion.h1
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: -100 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 1,
           }}
@@ -19,7 +19,26 @@ function Main() {
           Лакомства для счастливых собак
         </motion.h1>
         <Link to="/products">
-          <motion.button type="button" className="btn btn-primary mt-4">
+          <motion.button
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              opacity: {
+                duration: 1,
+              },
+              y: {
+                duration: 1,
+              },
+            }}
+            whileHover={{
+              scale: 1.1,
+            }}
+            whileTap={{
+              scale: 0.9,
+            }}
+            type="button"
+            className="btn btn-primary mt-4"
+          >
             перейти к покупкам
           </motion.button>
 

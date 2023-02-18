@@ -1,20 +1,21 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable max-len */
 import './CartItem.css'
 import { useDispatch } from 'react-redux'
+import { useState } from 'react'
 import {
-  changeIsPickProduct, deleteProduct, productDecrement, productIncrement,
+  changeIsPickProduct, productDecrement, productIncrement,
 } from '../../redux/slices/cartSlice'
 import minus from '../../assets/minus.svg'
 import plus from '../../assets/plus.svg'
+import DeleteItemModal from './DeleteItemModal'
 
 function CartItem({
   name, pictures, price, id, description, stock, discount, isPicked, count,
 }) {
   const dispatch = useDispatch()
-  const deleteProductHandler = () => {
-    dispatch(deleteProduct(id))
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const openDeleteModalHandler = () => {
+    setIsDeleteModalOpen(true)
   }
   const selectProductHandler = () => {
     dispatch(changeIsPickProduct(id))
@@ -67,9 +68,15 @@ function CartItem({
               <img src={plus} alt="plus" className="number__icon" />
             </button>
           </div>
-          <button type="button" className="btn btn-primary" onClick={deleteProductHandler}>Удалить</button>
+          <button type="button" className="btn btn-primary" onClick={openDeleteModalHandler}>Удалить</button>
         </div>
       </div>
+      <DeleteItemModal
+        isOpen={isDeleteModalOpen}
+        setIsDeleteModalOpen={setIsDeleteModalOpen}
+        title={name}
+        id={id}
+      />
     </li>
   )
 }

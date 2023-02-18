@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import './ProductItem.css'
 import { useDispatch, useSelector } from 'react-redux'
+import { motion } from 'framer-motion'
 import { addNewProduct, deleteProduct, getAllCartProductsSelector } from '../../redux/slices/cartSlice'
 import done from '../../assets/done.svg'
 import cart from '../../assets/cart.svg'
@@ -28,13 +29,23 @@ function ProductItem({
           {' '}
           ₽
         </p>
-        <button type="button" className="btn btn-primary" onClick={isInCart(id) ? removeFromCartHandler : moveToCartHandler}>
+        <motion.button
+          type="button"
+          whileHover={{
+            scale: 1.1,
+          }}
+          whileTap={{
+            scale: 0.9,
+          }}
+          className="btn btn-primary"
+          onClick={isInCart(id) ? removeFromCartHandler : moveToCartHandler}
+        >
           {isInCart(id) ? (
             <img className="card__icon" src={done} alt="done" />
           ) : (
             <img className="card__icon" src={cart} alt="cart" />
           )}
-        </button>
+        </motion.button>
       </div>
     </li>
   )

@@ -6,10 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import { Provider } from 'react-redux/es/exports'
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import App from './App'
 import Main from './components/Main/Main'
 import SignIn from './components/SignIn/SignIn'
@@ -18,6 +15,7 @@ import './index.css'
 import Cart from './components/Cart/Cart'
 import { store } from './redux/store'
 import Cathalog from './components/Cathalog/Cathalog'
+import { PageNotFound } from './components/PageNotFound/PageNotFound'
 // import App from './App'
 
 const router = createBrowserRouter([
@@ -44,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <Cart />,
+      },
+      {
+        path: '*',
+        element: <PageNotFound />,
       },
     ],
   },

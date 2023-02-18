@@ -16,6 +16,9 @@ import Cart from './components/Cart/Cart'
 import { store } from './redux/store'
 import Cathalog from './components/Cathalog/Cathalog'
 import { PageNotFound } from './components/PageNotFound/PageNotFound'
+import DetailPage from './components/DatailPage/DetailPage'
+import UserPage from './components/UserPage/UserPage'
+import FavoritesPage from './components/Favorites/Favorites'
 // import App from './App'
 
 const router = createBrowserRouter([
@@ -42,6 +45,18 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <Cart />,
+      },
+      {
+        path: '/product/:id',
+        element: <DetailPage />,
+      },
+      {
+        path: '/user/:id',
+        element: <UserPage />,
+      },
+      {
+        path: '/favorites',
+        element: <FavoritesPage />,
       },
       {
         path: '*',

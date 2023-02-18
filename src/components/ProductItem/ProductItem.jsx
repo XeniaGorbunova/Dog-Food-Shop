@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable max-len */
 import './ProductItem.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { addNewProduct, deleteProduct, getAllCartProductsSelector } from '../../redux/slices/cartSlice'
 import done from '../../assets/done.svg'
 import cart from '../../assets/cart.svg'
@@ -11,6 +14,7 @@ function ProductItem({
 }) {
   const cartProducts = useSelector(getAllCartProductsSelector)
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const moveToCartHandler = () => {
     dispatch(addNewProduct(id))
@@ -20,7 +24,13 @@ function ProductItem({
   }
   const isInCart = (productListId) => cartProducts.find((product) => product.id === productListId)
   return (
-    <li className="card m-2 product_card p-2">
+    <motion.li
+      className="card m-2 product_card p-2"
+      onClick={() => { navigate(`/product/${id}`) }}
+      whileHover={{
+        scale: 1.05,
+      }}
+    >
       <img src={pictures} className="card-img-top product_picture" alt="product" />
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
@@ -47,7 +57,7 @@ function ProductItem({
           )}
         </motion.button>
       </div>
-    </li>
+    </motion.li>
   )
 }
 

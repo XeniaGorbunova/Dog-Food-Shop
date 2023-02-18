@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import dogFace from '../../assets/dogFace.svg'
 import dog from '../../assets/dog.png'
 import cart from '../../assets/cart.svg'
+import heart from '../../assets/heart.svg'
 import { getAllCartProductsSelector } from '../../redux/slices/cartSlice'
 
 function Header() {
@@ -16,9 +17,14 @@ function Header() {
         <img src={dog} alt="" />
       </Link>
       <h1>Dog Food</h1>
-      <div className="d-flex align-items-center justify-content-center">
+      <div className="d-flex gap-3 align-items-center justify-content-center">
+
         <NavLink to="/signin" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>
           <img src={dogFace} alt="" style={{ width: '70px', height: '70px' }} />
+
+        </NavLink>
+        <NavLink to="/favorites" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>
+          <img src={heart} alt="" style={{ width: '70px', height: '70px', padding: '15px' }} />
 
         </NavLink>
         <NavLink to="/cart" className={({ isActive }) => (isActive ? 'active_link' : undefined)}>

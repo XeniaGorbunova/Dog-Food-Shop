@@ -3,6 +3,7 @@
   height: 22rem;
   align-items: center;
   background-color: rgb(246, 247, 248);
+  cursor: pointer;
 }
 
 .card-body {
@@ -13,8 +14,8 @@
 }
 
 .product_picture {
-  width: 10rem;
-  height: 10rem;
+  width: 150px;
+  height: 150px;
 }
 
 .card__icon {

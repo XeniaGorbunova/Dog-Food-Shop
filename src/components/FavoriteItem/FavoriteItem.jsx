@@ -1,35 +1,19 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable max-len */
 import './FavoriteItem.css'
 import { useDispatch } from 'react-redux'
-import { useState } from 'react'
-import {
-  changeIsPickProduct, productDecrement, productIncrement,
-} from '../../redux/slices/cartSlice'
-import minus from '../../assets/minus.svg'
-import plus from '../../assets/plus.svg'
+import smallHeart from '../../assets/smallHeart.svg'
+import { removeFavorite } from '../../redux/slices/favoriteSlice'
 
 function FavoriteItem({
-  name, pictures, price, id, description, stock, discount, isPicked, count,
+  name, pictures, price, id, description, stock, discount, count,
 }) {
   const dispatch = useDispatch()
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-  const openDeleteModalHandler = () => {
-    setIsDeleteModalOpen(true)
-  }
-  const selectProductHandler = () => {
-    dispatch(changeIsPickProduct(id))
-  }
-  const incrementCountHandler = () => {
-    if (count < stock) { dispatch(productIncrement(id)) }
-  }
-  const decrementCountHandler = () => {
-    if (count > 0) { dispatch(productDecrement(id)) }
-  }
   console.log({ count })
   return (
     <li className="card" style={{ width: '100%' }}>
-      <h5 className="card-header">
-        <input type="checkbox" checked={isPicked} style={{ marginRight: '10px' }} onChange={selectProductHandler} />
+      <h5 className="card-header" style={{ height: '65px' }}>
         {name}
       </h5>
       <div className="card-body">
@@ -53,21 +37,9 @@ function FavoriteItem({
               {' '}
               {stock}
             </p>
+            <img src={smallHeart} style={{ width: '30px', height: '30px' }} alt="not favorite" onClick={() => { dispatch(removeFavorite(id)) }} />
           </div>
           <img src={pictures} className="card-img-top product_picture" alt="product" />
-        </div>
-        <div className="d-flex flex-row gap-4 px-3">
-          <div className="d-flex flex-row gap-2 px-2 align-items-center">
-            <button type="button" className="btn btn-light" onClick={decrementCountHandler}>
-              <img src={minus} alt="minus" className="number__icon" />
-            </button>
-
-            <h4>{count}</h4>
-            <button type="button" className="btn btn-light" onClick={incrementCountHandler}>
-              <img src={plus} alt="plus" className="number__icon" />
-            </button>
-          </div>
-          <button type="button" className="btn btn-primary" onClick={openDeleteModalHandler}>Удалить</button>
         </div>
       </div>
     </li>

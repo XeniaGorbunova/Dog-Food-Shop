@@ -8,12 +8,15 @@ import { useNavigate } from 'react-router-dom'
 import { addNewProduct, deleteProduct, getAllCartProductsSelector } from '../../redux/slices/cartSlice'
 import done from '../../assets/done.svg'
 import cart from '../../assets/cart.svg'
+import smallHeart from '../../assets/smallHeart.svg'
+import redHeart from '../../assets/redHeart.svg'
+import { addFavorite, getAllFavoriteProductsSelector, removeFavorite } from '../../redux/slices/favoriteSlice'
 
 function ProductItem({
   name, pictures, price, id,
 }) {
   const cartProducts = useSelector(getAllCartProductsSelector)
-
+  const favorites = useSelector(getAllFavoriteProductsSelector)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const moveToCartHandler = () => {
@@ -22,16 +25,21 @@ function ProductItem({
   const removeFromCartHandler = () => {
     dispatch(deleteProduct(id))
   }
+  const navigateToDetailsHandler = (event) => {
+    if (event.target.className !== 'card__icon-favorite') navigate(`/product/${id}`)
+  }
   const isInCart = (productListId) => cartProducts.find((product) => product.id === productListId)
   return (
     <motion.li
       className="card m-2 product_card p-2"
-      onClick={() => { navigate(`/product/${id}`) }}
+      onClick={navigateToDetailsHandler}
       whileHover={{
         scale: 1.05,
       }}
     >
       <img src={pictures} className="card-img-top product_picture" alt="product" />
+      {favorites.includes(id) && <img src={redHeart} className="card__icon-favorite" alt="favorite" onClick={() => { dispatch(removeFavorite(id)) }} />}
+      {!favorites.includes(id) && <img src={smallHeart} className="card__icon-favorite" alt="not favorite" onClick={() => { dispatch(addFavorite(id)) }} />}
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <p className="card-text">

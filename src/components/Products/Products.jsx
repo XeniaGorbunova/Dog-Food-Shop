@@ -17,43 +17,43 @@ function ProductsInner({ data }) {
   const [searchParams] = useSearchParams()
   const currentFilterName = searchParams.get('filterName')
   console.log(currentFilterName)
-  useEffect(() => {
-    switch (currentFilterName) {
-      case 'New':
-        products = products.sort((item, nextItem) => {
-          const itemTime = new Date(Date.parse(item.updated_at))
-          const nextItemTime = new Date(Date.parse(nextItem.updated_at))
-          if (itemTime < nextItemTime) {
-            return -1
-          }
-          if (itemTime > nextItemTime) {
-            return 1
-          }
-          return 0
-        })
-        console.log('!', products)
-        break
-      case 'Sales':
-        products = products.filter((item) => item.discount > 0)
-        console.log('!!', products)
-        break
-      case 'Price':
-        products = products.sort((item, nextItem) => {
-          if (item.price < nextItem.price) {
-            return -1
-          }
-          if (item.price > nextItem.price) {
-            return 1
-          }
-          return 0
-        })
-        console.log('!!!', products)
-        break
+  // useEffect(() => {
+  switch (currentFilterName) {
+    case 'New':
+      products = products.sort((item, nextItem) => {
+        const itemTime = new Date(Date.parse(item.updated_at))
+        const nextItemTime = new Date(Date.parse(nextItem.updated_at))
+        if (itemTime < nextItemTime) {
+          return -1
+        }
+        if (itemTime > nextItemTime) {
+          return 1
+        }
+        return 0
+      })
+      console.log('!', products)
+      break
+    case 'Sales':
+      products = products.filter((item) => item.discount > 0)
+      console.log('!!', products)
+      break
+    case 'Price':
+      products = products.sort((item, nextItem) => {
+        if (item.price < nextItem.price) {
+          return -1
+        }
+        if (item.price > nextItem.price) {
+          return 1
+        }
+        return 0
+      })
+      console.log('!!!', products)
+      break
 
-      default:
-        break
-    }
-  }, [currentFilterName, products])
+    default:
+      break
+  }
+  // }, [currentFilterName, products])
   return (
     <div>
       {products[0] && (

@@ -2,6 +2,8 @@
 import './CartItem.css'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import {
   changeIsPickProduct, productDecrement, productIncrement,
 } from '../../redux/slices/cartSlice'
@@ -13,12 +15,17 @@ function CartItem({
   name, pictures, price, id, description, stock, discount, isPicked, count,
 }) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const openDeleteModalHandler = () => {
     setIsDeleteModalOpen(true)
   }
   const selectProductHandler = () => {
     dispatch(changeIsPickProduct(id))
+  }
+  const navigateToDetailsHandler = (event) => {
+    if (event.target.dataset.label === 'notNavigate') event.stopImmediatePropagation()
+    if (event.target.dataset.label !== 'notNavigate') navigate(`/product/${id}`)
   }
   const incrementCountHandler = () => {
     if (count < stock) { dispatch(productIncrement(id)) }
@@ -28,9 +35,16 @@ function CartItem({
   }
   console.log({ count })
   return (
-    <li className="card" style={{ width: '100%' }}>
+    <motion.li
+      className="card"
+      style={{ width: '100%', cursor: 'pointer' }}
+      onClick={navigateToDetailsHandler}
+      whileHover={{
+        scale: 1.05,
+      }}
+    >
       <h5 className="card-header">
-        <input type="checkbox" checked={isPicked} style={{ marginRight: '10px' }} onChange={selectProductHandler} />
+        <input type="checkbox" checked={isPicked} style={{ marginRight: '10px' }} onChange={selectProductHandler} data-label="notNavigate" />
         {name}
       </h5>
       <div className="card-body">
@@ -59,16 +73,16 @@ function CartItem({
         </div>
         <div className="d-flex flex-row gap-4 px-3">
           <div className="d-flex flex-row gap-2 px-2 align-items-center">
-            <button type="button" className="btn btn-light" onClick={decrementCountHandler}>
-              <img src={minus} alt="minus" className="number__icon" />
+            <button type="button" className="btn btn-light" onClick={decrementCountHandler} data-label="notNavigate">
+              <img src={minus} alt="minus" className="number__icon" data-label="notNavigate" />
             </button>
 
-            <h4>{count}</h4>
-            <button type="button" className="btn btn-light" onClick={incrementCountHandler}>
-              <img src={plus} alt="plus" className="number__icon" />
+            <h4 data-label="notNavigate">{count}</h4>
+            <button type="button" className="btn btn-light" onClick={incrementCountHandler} data-label="notNavigate">
+              <img src={plus} alt="plus" data-label="notNavigate" className="number__icon" />
             </button>
           </div>
-          <button type="button" className="btn btn-primary" onClick={openDeleteModalHandler}>Удалить</button>
+          <button type="button" data-label="notNavigate" className="btn btn-primary" onClick={openDeleteModalHandler}>Удалить</button>
         </div>
       </div>
       <DeleteItemModal
@@ -77,7 +91,7 @@ function CartItem({
         title={name}
         id={id}
       />
-    </li>
+    </motion.li>
   )
 }
 

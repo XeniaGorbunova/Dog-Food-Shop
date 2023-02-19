@@ -26,7 +26,7 @@ function ProductItem({
     dispatch(deleteProduct(id))
   }
   const navigateToDetailsHandler = (event) => {
-    if (event.target.className !== 'card__icon-favorite') navigate(`/product/${id}`)
+    if (event.target.dataset.label !== 'notNavigate') navigate(`/product/${id}`)
   }
   const isInCart = (productListId) => cartProducts.find((product) => product.id === productListId)
   return (
@@ -40,10 +40,26 @@ function ProductItem({
 
       <img src={pictures} className="card-img-top product_picture" alt="product" />
 
-      {favorites.includes(id) && <img src={redHeart} className="card__icon-favorite" alt="favorite" onClick={() => { dispatch(removeFavorite(id)) }} />}
-      {!favorites.includes(id) && <img src={smallHeart} className="card__icon-favorite" alt="not favorite" onClick={() => { dispatch(addFavorite(id)) }} />}
-      <div className="card-body">
-        <h5 className="card-title">{name}</h5>
+      {favorites.includes(id) && (
+        <img
+          src={redHeart}
+          className="card__icon-favorite"
+          alt="favorite"
+          data-label="notNavigate"
+          onClick={() => { dispatch(removeFavorite(id)) }}
+        />
+      )}
+      {!favorites.includes(id) && (
+        <img
+          src={smallHeart}
+          className="card__icon-favorite"
+          alt="not favorite"
+          data-label="notNavigate"
+          onClick={() => { dispatch(addFavorite(id)) }}
+        />
+      )}
+      <div className="card-body" style={{ minWidth: '270px' }}>
+        <h5 className="card-title" style={{ maxHeight: '48px', overflow: 'hidden' }}>{name}</h5>
         <div className="d-flex flex-row align-items-center justify-content-between">
           <p className="card-text mb-0">
             {price}
@@ -62,6 +78,7 @@ function ProductItem({
         </div>
         <motion.button
           type="button"
+          data-label="notNavigate"
           whileHover={{
             scale: 1.1,
           }}
@@ -72,9 +89,9 @@ function ProductItem({
           onClick={isInCart(id) ? removeFromCartHandler : moveToCartHandler}
         >
           {isInCart(id) ? (
-            <img className="card__icon" src={done} alt="done" />
+            <img className="card__icon" src={done} alt="done" data-label="notNavigate" />
           ) : (
-            <img className="card__icon" src={cart} alt="cart" />
+            <img className="card__icon" src={cart} alt="cart" data-label="notNavigate" />
           )}
         </motion.button>
       </div>

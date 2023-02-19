@@ -1,5 +1,4 @@
 import { useSearchParams } from 'react-router-dom'
-import styles from './Filters.module.css'
 
 export function Filters() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -14,7 +13,7 @@ export function Filters() {
   }
 
   return (
-    <div>
+    <div className="d-flex align-items-center justify-content-center gap-4 mb-2">
       {FILTERS.map((filter) => (
         <FilterItem key={filter} filterName={filter} clickFilterHandler={clickFilterHandler} />))}
     </div>
@@ -28,7 +27,7 @@ export function FilterItem({ filterName, clickFilterHandler }) {
   return (
     <button
       type="button"
-      className={filterName === currentFilterName ? styles.active : ''}
+      className={filterName === currentFilterName ? 'btn btn-info' : 'btn btn-light'}
       onClick={() => clickFilterHandler(filterName)}
     >
       {filterName}

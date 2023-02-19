@@ -1,7 +1,8 @@
+/* eslint-disable prefer-const */
 /* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import ProductItem from '../ProductItem/ProductItem'
@@ -12,7 +13,47 @@ import { getQuerySearchKey } from './utils'
 import { getTokenSelector } from '../../redux/slices/userSlice'
 
 function ProductsInner({ data }) {
-  const products = data
+  let products = data
+  const [searchParams] = useSearchParams()
+  const currentFilterName = searchParams.get('filterName')
+  console.log(currentFilterName)
+  useEffect(() => {
+    switch (currentFilterName) {
+      case 'New':
+        products = products.sort((item, nextItem) => {
+          const itemTime = new Date(Date.parse(item.updated_at))
+          const nextItemTime = new Date(Date.parse(nextItem.updated_at))
+          if (itemTime < nextItemTime) {
+            return -1
+          }
+          if (itemTime > nextItemTime) {
+            return 1
+          }
+          return 0
+        })
+        console.log('!', products)
+        break
+      case 'Sales':
+        products = products.filter((item) => item.discount > 0)
+        console.log('!!', products)
+        break
+      case 'Price':
+        products = products.sort((item, nextItem) => {
+          if (item.price < nextItem.price) {
+            return -1
+          }
+          if (item.price > nextItem.price) {
+            return 1
+          }
+          return 0
+        })
+        console.log('!!!', products)
+        break
+
+      default:
+        break
+    }
+  }, [currentFilterName, products])
   return (
     <div>
       {products[0] && (
@@ -41,6 +82,7 @@ const ProductsInnerWithQuery = withQuery(ProductsInner)
 function Products() {
   const userToken = useSelector(getTokenSelector)
   const navigate = useNavigate()
+
   console.log({ userToken })
   useEffect(() => {
     if (!userToken) {
@@ -56,7 +98,7 @@ function Products() {
     queryFn: () => DogFoodApiConst.getAllProducts(search, userToken),
     enabled: !!(userToken),
   })
-  console.log({ data, key: getQuerySearchKey(search) })
+  console.log({ data })
 
   return <ProductsInnerWithQuery data={data} isLoading={isLoading} isError={isError} refetch={refetch} error={error} />
 }

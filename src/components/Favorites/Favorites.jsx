@@ -49,7 +49,8 @@ function FavoritesPage() {
             Очистить
           </button>
           <ul
-            className="d-flex flex-row gap-3 p-2  align-items-center justify-content-space-between"
+            className="d-flex flex-column gap-3 p-2  align-items-center justify-content-space-between"
+            style={{ maxWidth: '800px' }}
           >
             {favoriteProducts.map((item) => (
               <FavoriteItem

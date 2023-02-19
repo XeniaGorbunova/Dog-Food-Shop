@@ -24,6 +24,7 @@ function ProductsInner({ data }) {
             name={product.name}
             price={product.price}
             pictures={product.pictures}
+            discount={product.discount}
           />
         ))}
       </ul>

@@ -13,7 +13,7 @@ import redHeart from '../../assets/redHeart.svg'
 import { addFavorite, getAllFavoriteProductsSelector, removeFavorite } from '../../redux/slices/favoriteSlice'
 
 function ProductItem({
-  name, pictures, price, id,
+  name, pictures, price, id, discount,
 }) {
   const cartProducts = useSelector(getAllCartProductsSelector)
   const favorites = useSelector(getAllFavoriteProductsSelector)
@@ -37,16 +37,29 @@ function ProductItem({
         scale: 1.05,
       }}
     >
+
       <img src={pictures} className="card-img-top product_picture" alt="product" />
+
       {favorites.includes(id) && <img src={redHeart} className="card__icon-favorite" alt="favorite" onClick={() => { dispatch(removeFavorite(id)) }} />}
       {!favorites.includes(id) && <img src={smallHeart} className="card__icon-favorite" alt="not favorite" onClick={() => { dispatch(addFavorite(id)) }} />}
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
-        <p className="card-text">
-          {price}
-          {' '}
-          ₽
-        </p>
+        <div className="d-flex flex-row align-items-center justify-content-between">
+          <p className="card-text mb-0">
+            {price}
+            {' '}
+            ₽
+          </p>
+          {discount > 0 && (
+          <span className="badge rounded-pill bg-info text-dark">
+            -
+            {' '}
+            {discount}
+            {' '}
+            %
+          </span>
+          )}
+        </div>
         <motion.button
           type="button"
           whileHover={{

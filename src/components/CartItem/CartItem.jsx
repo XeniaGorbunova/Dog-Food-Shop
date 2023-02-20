@@ -24,7 +24,6 @@ function CartItem({
     dispatch(changeIsPickProduct(id))
   }
   const navigateToDetailsHandler = (event) => {
-    if (event.target.dataset.label === 'notNavigate') event.stopImmediatePropagation()
     if (event.target.dataset.label !== 'notNavigate') navigate(`/product/${id}`)
   }
   const incrementCountHandler = () => {

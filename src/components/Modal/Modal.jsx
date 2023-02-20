@@ -46,7 +46,11 @@ const ModalInner = ({ closeHandler, children }) => {
   }, [])
 
   return (
-    <motion.div className={styles.modalInner} variants={modalContentVariants}>
+    <motion.div
+      className={styles.modalInner}
+      variants={modalContentVariants}
+      data-label="notNavigate"
+    >
       {children}
     </motion.div>
   )
@@ -67,6 +71,7 @@ const Modal = ({ isOpen, closeHandler, children }) => {
         exit="hidden"
         onClick={closeModalByClickHandler}
         className={styles.modalWr}
+        data-label="notNavigate"
       >
         <ModalInner closeHandler={closeHandler}>{children}</ModalInner>
       </motion.div>

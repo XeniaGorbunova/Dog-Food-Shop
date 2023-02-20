@@ -6,10 +6,17 @@ export function Filters() {
   const FILTERS = ['Price', 'Sales', 'New']
 
   const clickFilterHandler = (filterName) => {
-    setSearchParams({
-      ...Object.fromEntries(searchParams.entries()),
-      filterName,
-    })
+    const currentFilterName = searchParams.get('filterName')
+    if (currentFilterName && currentFilterName.length && currentFilterName === filterName) {
+      setSearchParams('', filterName)
+      console.log('no')
+    } else {
+      setSearchParams({
+        ...Object.fromEntries(searchParams.entries()),
+        filterName,
+      })
+      console.log('yes')
+    }
   }
 
   return (

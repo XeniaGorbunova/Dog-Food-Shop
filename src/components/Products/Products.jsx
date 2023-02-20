@@ -13,12 +13,15 @@ import { getQuerySearchKey } from './utils'
 import { getTokenSelector } from '../../redux/slices/userSlice'
 
 function ProductsInner({ data }) {
-  let products = data
+  let products = [...data]
   const [searchParams] = useSearchParams()
   const currentFilterName = searchParams.get('filterName')
   console.log(currentFilterName)
   // useEffect(() => {
   switch (currentFilterName) {
+    case null:
+      products = [...data]
+      break
     case 'New':
       products = products.sort((item, nextItem) => {
         const itemTime = new Date(Date.parse(item.updated_at))
@@ -31,23 +34,28 @@ function ProductsInner({ data }) {
         }
         return 0
       })
-      console.log('!', products)
       break
     case 'Sales':
-      products = products.filter((item) => item.discount > 0)
-      console.log('!!', products)
-      break
-    case 'Price':
-      products = products.sort((item, nextItem) => {
-        if (item.price < nextItem.price) {
+      products = products.filter((item) => item.discount > 0).sort((item, nextItem) => {
+        if (item.discount > nextItem.discount) {
           return -1
         }
-        if (item.price > nextItem.price) {
+        if (item.discount < nextItem.discount) {
           return 1
         }
         return 0
       })
-      console.log('!!!', products)
+      break
+    case 'Price':
+      products = products.sort((item, nextItem) => {
+        if (item.price > nextItem.price) {
+          return -1
+        }
+        if (item.price < nextItem.price) {
+          return 1
+        }
+        return 0
+      })
       break
 
     default:

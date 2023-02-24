@@ -6,7 +6,9 @@ import Footer from './components/Footer/Footer'
 
 function App() {
   return (
-    <div className="container_100 d-flex flex-column align-items-center">
+    <div
+      className="container_100 d-flex flex-column align-items-center"
+    >
       <Header />
       <Outlet />
       <Footer />

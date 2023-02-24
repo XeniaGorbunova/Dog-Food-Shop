@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 export function Filters() {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const FILTERS = ['Price', 'Sales', 'New']
+  const FILTERS = ['Дороже', 'Дешевле', 'Скидки', 'Новинки']
 
   const clickFilterHandler = (filterName) => {
     const currentFilterName = searchParams.get('filterName')

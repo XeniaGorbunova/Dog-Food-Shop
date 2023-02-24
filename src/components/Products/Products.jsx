@@ -22,7 +22,7 @@ function ProductsInner({ data }) {
     case null:
       products = [...data]
       break
-    case 'New':
+    case 'Новинки':
       products = products.sort((item, nextItem) => {
         const itemTime = new Date(Date.parse(item.updated_at))
         const nextItemTime = new Date(Date.parse(nextItem.updated_at))
@@ -35,7 +35,7 @@ function ProductsInner({ data }) {
         return 0
       })
       break
-    case 'Sales':
+    case 'Скидки':
       products = products.filter((item) => item.discount > 0).sort((item, nextItem) => {
         if (item.discount > nextItem.discount) {
           return -1
@@ -46,12 +46,23 @@ function ProductsInner({ data }) {
         return 0
       })
       break
-    case 'Price':
+    case 'Дороже':
       products = products.sort((item, nextItem) => {
         if (item.price > nextItem.price) {
           return -1
         }
         if (item.price < nextItem.price) {
+          return 1
+        }
+        return 0
+      })
+      break
+    case 'Дешевле':
+      products = products.sort((item, nextItem) => {
+        if (item.price < nextItem.price) {
+          return -1
+        }
+        if (item.price > nextItem.price) {
           return 1
         }
         return 0

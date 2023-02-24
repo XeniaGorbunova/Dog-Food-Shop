@@ -62,51 +62,53 @@ function UserPage() {
   }
 
   return (
-    <div className="card m-3" style={{ width: '25rem' }}>
-      {isAvatarEditing && (
-      <EditAvatarForm
-        userAvatar={data.avatar}
-        setReloadKey={setReloadKey}
-        reloadKey={reloadKey}
-        isAvatarEditing={isAvatarEditing}
-        setIsAvatarEditing={setIsAvatarEditing}
-      />
-      )}
-      <img className="card-img-top" src={data.avatar} alt="user" />
-      <img
-        src={pen}
-        alt="edit"
-        style={{
-          position: 'absolute', top: '15px', right: '15px', cursor: 'pointer',
-        }}
-        onClick={handleAvatarEdit}
-      />
-      <div className="card-body">
-        <Formik
-          initialValues={initialValues}
-          validationSchema={UserEditValidationSchema}
-          onSubmit={(values) => handleSubmit(values)}
-        >
-          <Form className="d-flex flex-column" style={{ width: '100%' }}>
-            <Field className="mb-3 form-control" name="name" type="text" />
-            <ErrorMessage component="p" className="error" name="name" />
-            <Field className="mb-3 form-control" name="about" type="text" />
-            <ErrorMessage component="p" className="error" name="about" />
-            <p>
-              <b>Группа:</b>
-              {' '}
-              {data.group}
-            </p>
-            <p>
-              <b>Email:</b>
-              {' '}
-              {data.email}
-            </p>
-            <button type="submit" disabled={isLoading} className="btn btn-primary">
-              Сохранить
-            </button>
-          </Form>
-        </Formik>
+    <div className="d-flex align-items-center" style={{ paddingBottom: '90px' }}>
+      <div className="card m-3" style={{ width: '25rem' }}>
+        {isAvatarEditing && (
+        <EditAvatarForm
+          userAvatar={data.avatar}
+          setReloadKey={setReloadKey}
+          reloadKey={reloadKey}
+          isAvatarEditing={isAvatarEditing}
+          setIsAvatarEditing={setIsAvatarEditing}
+        />
+        )}
+        <img className="card-img-top" src={data.avatar} alt="user" />
+        <img
+          src={pen}
+          alt="edit"
+          style={{
+            position: 'absolute', top: '15px', right: '15px', cursor: 'pointer', width: '25px', height: '25px',
+          }}
+          onClick={handleAvatarEdit}
+        />
+        <div className="card-body">
+          <Formik
+            initialValues={initialValues}
+            validationSchema={UserEditValidationSchema}
+            onSubmit={(values) => handleSubmit(values)}
+          >
+            <Form className="d-flex flex-column" style={{ width: '100%' }}>
+              <Field className="mb-3 form-control" name="name" type="text" />
+              <ErrorMessage component="p" className="error" name="name" />
+              <Field className="mb-3 form-control" name="about" type="text" />
+              <ErrorMessage component="p" className="error" name="about" />
+              <p>
+                <b>Группа:</b>
+                {' '}
+                {data.group}
+              </p>
+              <p>
+                <b>Email:</b>
+                {' '}
+                {data.email}
+              </p>
+              <button type="submit" disabled={isLoading} className="btn btn-primary">
+                Сохранить
+              </button>
+            </Form>
+          </Formik>
+        </div>
       </div>
     </div>
   )

@@ -1,24 +1,29 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable max-len */
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { UserEditValidationSchema } from '../../validator'
 import '../../index.css'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import Loader from '../Loader/Loader'
-
+import pen from '../../assets/pen.svg'
 import { getQueryUserKey } from '../Products/utils'
 import { getTokenSelector, getUserSelector } from '../../redux/slices/userSlice'
+import EditAvatarForm from './EditAvatarForm'
 
 function UserPage() {
-  const { id } = useParams()
+  // const { id } = useParams()
   const navigate = useNavigate()
   const userToken = useSelector(getTokenSelector)
   const { group } = useSelector(getUserSelector)
+  const [isAvatarEditing, setIsAvatarEditing] = useState(false)
+  const [reloadKey, setReloadKey] = useState(0)
   useEffect(() => {
     if (!userToken) {
       navigate('/signin')
@@ -28,7 +33,7 @@ function UserPage() {
   const {
     data, isLoading, isError, error,
   } = useQuery({
-    queryKey: getQueryUserKey(id),
+    queryKey: getQueryUserKey(reloadKey),
     queryFn: () => DogFoodApiConst.getUser(group, userToken),
     enabled: !!(userToken),
   })
@@ -42,6 +47,10 @@ function UserPage() {
 
   const handleSubmit = async (values) => {
     await mutateAsync(values)
+    setReloadKey(reloadKey + 1)
+  }
+  const handleAvatarEdit = () => {
+    setIsAvatarEditing(!isAvatarEditing)
   }
   if (isLoading || isEditLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>
@@ -54,7 +63,24 @@ function UserPage() {
 
   return (
     <div className="card m-3" style={{ width: '25rem' }}>
+      {isAvatarEditing && (
+      <EditAvatarForm
+        userAvatar={data.avatar}
+        setReloadKey={setReloadKey}
+        reloadKey={reloadKey}
+        isAvatarEditing={isAvatarEditing}
+        setIsAvatarEditing={setIsAvatarEditing}
+      />
+      )}
       <img className="card-img-top" src={data.avatar} alt="user" />
+      <img
+        src={pen}
+        alt="edit"
+        style={{
+          position: 'absolute', top: '15px', right: '15px', cursor: 'pointer',
+        }}
+        onClick={handleAvatarEdit}
+      />
       <div className="card-body">
         <Formik
           initialValues={initialValues}

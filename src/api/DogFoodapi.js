@@ -16,6 +16,9 @@ class DogFoodApi {
       },
       body: JSON.stringify(data),
     })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при регистрации. ${response.statusText}.`)
+    }
     return response.json()
   }
 
@@ -27,6 +30,9 @@ class DogFoodApi {
       },
       body: JSON.stringify(data),
     })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при авторизации. ${response.statusText}.`)
+    }
     return response.json()
   }
 
@@ -46,7 +52,7 @@ class DogFoodApi {
     })
 
     if (response.status >= 400) {
-      throw new Error(`${response.status}: Произошла ошибка при получении информации о товарах. Попробуйте сделать запрос позже.`)
+      throw new Error(`${response.status}: Произошла ошибка при получении информации о товарах. ${response.statusText}.`)
     }
 
     return response.json()
@@ -60,7 +66,7 @@ class DogFoodApi {
     })
 
     if (response.status >= 400) {
-      throw new Error(`${response.status}: Произошла ошибка при получении информации о товарe. Попробуйте сделать запрос позже.`)
+      throw new Error(`${response.status}: Произошла ошибка при получении информации о товарe. ${response.statusText}.`)
     }
 
     return response.json()
@@ -75,6 +81,9 @@ class DogFoodApi {
       },
       body: JSON.stringify(data),
     })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при сохранении информации о товаре. ${response.statusText}.`)
+    }
     return response.json()
   }
 
@@ -87,6 +96,9 @@ class DogFoodApi {
       },
       body: JSON.stringify(data),
     })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при сохранении информации о товаре. ${response.statusText}.`)
+    }
     return response.json()
   }
 
@@ -97,6 +109,9 @@ class DogFoodApi {
         authorization: `Bearer ${token}`,
       },
     })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при удалении товара. ${response.statusText}.`)
+    }
     return response.json()
   }
 
@@ -108,7 +123,7 @@ class DogFoodApi {
     })
 
     if (response.status >= 400) {
-      throw new Error(`${response.status}: Произошла ошибка при получении информации о пользователе. Попробуйте сделать запрос позже.`)
+      throw new Error(`${response.status}: Произошла ошибка при получении информации о пользователе. ${response.statusText}.`)
     }
 
     return response.json()
@@ -123,11 +138,14 @@ class DogFoodApi {
       },
       body: JSON.stringify(data),
     })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при сохранении информации о пользователе. ${response.statusText}.`)
+    }
     return response.json()
   }
 
   async editUserAvatar(group, data, token) {
-    const response = await fetch(`${this.baseUrl}/v2/${group}/users/me`, {
+    const response = await fetch(`${this.baseUrl}/v2/${group}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: `Bearer ${token}`,
@@ -135,6 +153,9 @@ class DogFoodApi {
       },
       body: JSON.stringify(data),
     })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при сохранении аватара. ${response.statusText}.`)
+    }
     return response.json()
   }
 }

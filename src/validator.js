@@ -29,3 +29,10 @@ export const UserEditValidationSchema = Yup.object({
   about: Yup.string()
     .required('Поле обязательно'),
 })
+
+// eslint-disable-next-line max-len
+
+export const UserEditAvatarValidationSchema = Yup.object({
+  avatar: Yup.string()
+    .required('Поле обязательно'),
+})

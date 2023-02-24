@@ -38,7 +38,7 @@ function FavoritesPage() {
   if (isError) return <p>{`${error} `}</p>
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%', paddingBottom: '70px' }}>
       {!favorites[0] && (
       <div className="d-flex align-items-center justify-content-center flex-column mt-5">
         <h1>Вы ещё ничего не выбрали</h1>

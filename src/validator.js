@@ -36,3 +36,8 @@ export const UserEditAvatarValidationSchema = Yup.object({
   avatar: Yup.string()
     .required('Поле обязательно'),
 })
+
+export const ProductEditValidationSchema = Yup.object({
+  avatar: Yup.string()
+    .required('Поле обязательно'),
+})

@@ -1,65 +1,88 @@
+/* eslint-disable max-len */
 import { useNavigate, useParams } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
-import { SignUpFormValidationSchema } from '../../validator'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { UserEditValidationSchema } from '../../validator'
 import '../../index.css'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import Loader from '../Loader/Loader'
 
+import { getQueryUserKey } from '../Products/utils'
+import { getTokenSelector, getUserSelector } from '../../redux/slices/userSlice'
+
 function UserPage() {
   const { id } = useParams()
-  const initialValues = {
-    email: '',
-    group: 'sm9',
-    password: '',
-  }
-
   const navigate = useNavigate()
+  const userToken = useSelector(getTokenSelector)
+  const { group } = useSelector(getUserSelector)
+  useEffect(() => {
+    if (!userToken) {
+      navigate('/signin')
+    }
+  }, [userToken])
 
   const {
-    mutateAsync, isLoading, isError, error,
+    data, isLoading, isError, error,
+  } = useQuery({
+    queryKey: getQueryUserKey(id),
+    queryFn: () => DogFoodApiConst.getUser(group, userToken),
+    enabled: !!(userToken),
+  })
+  console.log({ data })
+
+  const {
+    mutateAsync, isLoading: isEditLoading, isError: isEditError, error: errorEdit,
   } = useMutation({
-    mutationFn: (data) => DogFoodApiConst.signUp(data),
+    mutationFn: (dataEdit) => DogFoodApiConst.editUserInfo(group, dataEdit, userToken),
   })
 
   const handleSubmit = async (values) => {
     await mutateAsync(values)
-    navigate('/signin')
   }
-  if (isLoading) return <Loader />
+  if (isLoading || isEditLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>
+  if (isEditError) return <p>{`${errorEdit} `}</p>
+
+  const initialValues = {
+    name: data.name ? data.name : '',
+    about: data.about ? data.about : '',
+  }
 
   return (
-    <>
-      <h1 className="mt-5">{id}</h1>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={SignUpFormValidationSchema}
-        onSubmit={(values) => handleSubmit(values)}
-      >
-        <Form className="d-flex flex-column" style={{ width: '30%' }}>
-          <Field className="mb-3 form-control" name="email" type="email" placeholder="email here" />
-          <ErrorMessage component="p" className="error" name="email" />
-
-          <Field className="mb-3 form-control" name="group" type="text" placeholder="sm9" />
-          <ErrorMessage component="p" className="error" name="group" />
-
-          <Field
-            className="mb-3 form-control"
-            name="password"
-            type="password"
-            placeholder="password here"
-          />
-          <ErrorMessage component="p" className="error" name="password" />
-
-          <button type="submit" disabled={isLoading} className="btn btn-primary">
-            Зарегистрироваться
-          </button>
-        </Form>
-      </Formik>
-    </>
+    <div className="card m-3" style={{ width: '25rem' }}>
+      <img className="card-img-top" src={data.avatar} alt="user" />
+      <div className="card-body">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={UserEditValidationSchema}
+          onSubmit={(values) => handleSubmit(values)}
+        >
+          <Form className="d-flex flex-column" style={{ width: '100%' }}>
+            <Field className="mb-3 form-control" name="name" type="text" />
+            <ErrorMessage component="p" className="error" name="name" />
+            <Field className="mb-3 form-control" name="about" type="text" />
+            <ErrorMessage component="p" className="error" name="about" />
+            <p>
+              <b>Группа:</b>
+              {' '}
+              {data.group}
+            </p>
+            <p>
+              <b>Email:</b>
+              {' '}
+              {data.email}
+            </p>
+            <button type="submit" disabled={isLoading} className="btn btn-primary">
+              Сохранить
+            </button>
+          </Form>
+        </Formik>
+      </div>
+    </div>
   )
 }
 

@@ -3,8 +3,9 @@
 /* eslint-disable no-underscore-dangle */
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../../index.css'
+import { useEffect } from 'react'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import { getTokenSelector } from '../../redux/slices/userSlice'
 import Loader from '../Loader/Loader'
@@ -16,6 +17,12 @@ function FavoritesPage() {
   const favorites = useSelector(getAllFavoriteProductsSelector)
   const userToken = useSelector(getTokenSelector)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!userToken) {
+      navigate('/signin')
+    }
+  }, [userToken])
   const {
     data: favoriteProducts, isLoading, isError, error,
   } = useQuery({
@@ -50,7 +57,7 @@ function FavoritesPage() {
           </button>
           <ul
             className="d-flex flex-column gap-3 p-2  align-items-center justify-content-space-between"
-            style={{ maxWidth: '800px' }}
+            style={{ maxWidth: '800px', minWidth: '700px' }}
           >
             {favoriteProducts.map((item) => (
               <FavoriteItem

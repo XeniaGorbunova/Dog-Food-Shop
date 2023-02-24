@@ -22,3 +22,10 @@ export const SignInFormValidationSchema = Yup.object({
     .max(12, 'Пароль должен содержать не более 12 символов')
     .required('Поле обязательно'),
 })
+
+export const UserEditValidationSchema = Yup.object({
+  name: Yup.string()
+    .required('Поле обязательно'),
+  about: Yup.string()
+    .required('Поле обязательно'),
+})

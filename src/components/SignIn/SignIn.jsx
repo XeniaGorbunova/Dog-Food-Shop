@@ -31,7 +31,7 @@ function SignIn() {
           const cartForCurrentUser = JSON.parse(cartFromLS)[user.data._id]
           dispatch(cartInitialize(cartForCurrentUser ?? []))
         }
-        dispatch(setNewUser(user.data._id, user.token, user.data.email))
+        dispatch(setNewUser(user.data._id, user.token, user.data.email, user.data.group))
       }),
   })
 

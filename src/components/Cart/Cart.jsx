@@ -3,8 +3,9 @@
 /* eslint-disable max-len */
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../../index.css'
+import { useEffect } from 'react'
 import {
   clearCart, getAllCartProductsSelector, notPickAllProducts, pickAllProducts,
 } from '../../redux/slices/cartSlice'
@@ -18,6 +19,12 @@ function Cart() {
   const cart = useSelector(getAllCartProductsSelector)
   const userToken = useSelector(getTokenSelector)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!userToken) {
+      navigate('/signin')
+    }
+  }, [userToken])
   const {
     data: cartProducts, isLoading, isError, error,
   } = useQuery({

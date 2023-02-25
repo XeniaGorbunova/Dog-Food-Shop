@@ -20,6 +20,7 @@ function Cart() {
   const userToken = useSelector(getTokenSelector)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const getKey = cart.map((item) => item.id).toString()
   useEffect(() => {
     if (!userToken) {
       navigate('/signin')
@@ -28,7 +29,7 @@ function Cart() {
   const {
     data: cartProducts, isLoading, isError, error,
   } = useQuery({
-    queryKey: [getQueryCartKey(cart.length)],
+    queryKey: [getQueryCartKey(getKey)],
     queryFn: () => DogFoodApiConst.getProductsByIds(cart.map((product) => product.id), userToken),
     enabled: !!(userToken),
   })

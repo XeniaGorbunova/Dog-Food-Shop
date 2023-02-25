@@ -3,8 +3,6 @@ import { motion } from 'framer-motion'
 import './Main.css'
 
 function Main() {
-  console.log()
-
   return (
     <div className="picture">
       <div className="opacity">

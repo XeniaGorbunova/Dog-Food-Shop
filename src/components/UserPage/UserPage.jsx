@@ -41,7 +41,8 @@ function UserPage() {
   const {
     mutateAsync, isLoading: isEditLoading, isError: isEditError, error: errorEdit,
   } = useMutation({
-    mutationFn: (dataEdit) => DogFoodApiConst.editUserInfo(group, dataEdit, userToken),
+    mutationFn: (dataEdit) => DogFoodApiConst.editUserInfo(group, dataEdit, userToken)
+      .then(() => setReloadKey(reloadKey + 1)),
   })
 
   const handleSubmit = async (values) => {

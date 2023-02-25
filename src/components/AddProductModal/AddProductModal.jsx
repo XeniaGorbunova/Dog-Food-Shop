@@ -68,7 +68,7 @@ const AddProductModal = ({
             <ErrorMessage component="p" className="error" name="description" />
           </label>
           <label>
-            Введите ссылку на фото товара
+            Введите ссылку на фото товара c окончанием .jpg
             <Field className="mb-2 form-control" name="pictures" type="text" />
             <ErrorMessage component="p" className="error" name="pictures" />
           </label>

@@ -16,7 +16,7 @@ import Loader from '../Loader/Loader'
 import { addFavorite, getAllFavoriteProductsSelector, removeFavorite } from '../../redux/slices/favoriteSlice'
 import smallHeart from '../../assets/smallHeart.svg'
 import redHeart from '../../assets/redHeart.svg'
-import { ProductEditValidationSchema } from '../../validator'
+import { ProductValidationSchema } from '../../validator'
 import done from '../../assets/done.svg'
 import cart from '../../assets/cart.svg'
 import pen from '../../assets/pen.svg'
@@ -81,7 +81,7 @@ function DetailPage() {
     <div className="card m-5" style={{ width: '70%' }}>
       <Formik
         initialValues={initialValues}
-        validationSchema={ProductEditValidationSchema}
+        validationSchema={ProductValidationSchema}
         onSubmit={(values) => handleSubmit(values)}
       >
         <Form className="d-flex flex-column" style={{ width: '100%' }}>

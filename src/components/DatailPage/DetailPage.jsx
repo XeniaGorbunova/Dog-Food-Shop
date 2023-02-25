@@ -23,16 +23,15 @@ import trash from '../../assets/trash.svg'
 import { addNewProduct, deleteProduct, getAllCartProductsSelector } from '../../redux/slices/cartSlice'
 // import SuccessModal from './SuccessModal'
 import DeleteProductModal from './DeleteProductModal'
+import EditProductModal from './EditProductModal'
 
 function DetailPage() {
   const { id } = useParams()
   const dispatch = useDispatch()
   // const [action, setAction] = useState('')
   // const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-  const openDeleteModalHandler = () => {
-    setIsDeleteModalOpen(true)
-  }
   const navigate = useNavigate()
   const userToken = useSelector(getTokenSelector)
   const [reloadKey, setReloadKey] = useState(0)
@@ -58,6 +57,12 @@ function DetailPage() {
   } = useMutation({
     mutationFn: (dataEdit) => DogFoodApiConst.editProduct(id, dataEdit, userToken),
   })
+  const openDeleteModalHandler = () => {
+    setIsDeleteModalOpen(true)
+  }
+  const openEditModalHandler = () => {
+    setIsEditModalOpen(true)
+  }
 
   const handleSubmit = async (values) => {
     await mutateAsync(values)
@@ -161,6 +166,7 @@ function DetailPage() {
                   scale: 0.9,
                 }}
                 className="btn btn-primary"
+                onClick={openEditModalHandler}
               >
                 <img src={pen} alt="edit" style={{ width: '25px', height: '25px' }} />
               </motion.button>
@@ -188,6 +194,19 @@ function DetailPage() {
             setIsSuccessModalOpen={setIsSuccessModalOpen}
             action={action}
           /> */}
+          <EditProductModal
+            isOpen={isEditModalOpen}
+            setIsEditModalOpen={setIsEditModalOpen}
+            name={data.name}
+            id={id}
+            pictures={data.pictures}
+            description={data.description}
+            available={data.available}
+            stock={data.stock}
+            price={data.price}
+            discount={data.discount}
+            wight={data.wight}
+          />
           <DeleteProductModal
             isOpen={isDeleteModalOpen}
             setIsDeleteModalOpen={setIsDeleteModalOpen}

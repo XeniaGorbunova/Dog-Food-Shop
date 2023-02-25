@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-underscore-dangle */
 import { useMutation } from '@tanstack/react-query'
 import {
   ErrorMessage, Field, Form, Formik,
@@ -12,32 +14,33 @@ import Modal from '../Modal/Modal'
 
 /* eslint-disable react/function-component-definition */
 const EditProductModal = ({
-  setIsAddModalOpen, isOpen,
+  setIsEditModalOpen, isOpen, name, price, pictures,
+  available, stock, discount, description, wight, id,
 }) => {
   const navigate = useNavigate()
   const userToken = useSelector(getTokenSelector)
-  const closeAddModalHandler = () => {
-    setIsAddModalOpen(false)
+  const closeEditModalHandler = () => {
+    setIsEditModalOpen(false)
   }
   const {
     mutateAsync, isLoading, isError, error,
   } = useMutation({
-    mutationFn: (dataEdit) => DogFoodApiConst.addProduct(dataEdit, userToken)
+    mutationFn: (dataEdit) => DogFoodApiConst.editProduct(id, dataEdit, userToken)
       .then((data) => {
-        setIsAddModalOpen(false)
+        setIsEditModalOpen(false)
         console.log(data._id)
         setTimeout(() => navigate(`/product/${data._id}`))
       }),
   })
   const initialValues = {
-    available: true,
-    pictures: '',
-    name: '',
-    price: '',
-    discount: 0,
-    stock: 0,
-    wight: '',
-    description: '',
+    available,
+    pictures,
+    name,
+    price,
+    discount,
+    stock,
+    wight,
+    description,
 
   }
   const handleSubmit = async (values) => {
@@ -46,7 +49,7 @@ const EditProductModal = ({
   if (isLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>
   return (
-    <Modal isOpen={isOpen} closeHandler={closeAddModalHandler}>
+    <Modal isOpen={isOpen} closeHandler={closeEditModalHandler}>
       <h1>Введите данные о товаре</h1>
       <Formik
         initialValues={initialValues}
@@ -101,7 +104,7 @@ const EditProductModal = ({
               type="button"
               data-label="notNavigate"
               className="btn btn-success mx-2"
-              onClick={closeAddModalHandler}
+              onClick={closeEditModalHandler}
             >
               Отменить
             </button>

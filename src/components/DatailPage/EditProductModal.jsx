@@ -14,8 +14,8 @@ import Modal from '../Modal/Modal'
 
 /* eslint-disable react/function-component-definition */
 const EditProductModal = ({
-  setIsEditModalOpen, isOpen, name, price, pictures,
-  available, stock, discount, description, wight, id,
+  setIsEditModalOpen, isOpen, name, price, pictures, reloadKey,
+  available, stock, discount, description, wight, id, setReloadKey,
 }) => {
   const navigate = useNavigate()
   const userToken = useSelector(getTokenSelector)
@@ -28,7 +28,7 @@ const EditProductModal = ({
     mutationFn: (dataEdit) => DogFoodApiConst.editProduct(id, dataEdit, userToken)
       .then((data) => {
         setIsEditModalOpen(false)
-        console.log(data._id)
+        setReloadKey(reloadKey + 1)
         setTimeout(() => navigate(`/product/${data._id}`))
       }),
   })

@@ -1,9 +1,24 @@
 .product_picture {
-  width: 10rem;
-  height: 10rem;
+  width: 200px;
+  height: 200px;
 }
 
 .number__icon {
   width: 18px;
   height: 18px;
+}
+
+button__star {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.on {
+  color: #000;
+}
+
+.off {
+  color: #ccc;
 }

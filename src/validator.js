@@ -55,3 +55,8 @@ export const ProductValidationSchema = Yup.object({
     .required('Поле обязательно'),
 
 })
+
+export const CommentFormValidationSchema = Yup.object({
+  comment: Yup.string()
+    .required('Поле обязательно'),
+})

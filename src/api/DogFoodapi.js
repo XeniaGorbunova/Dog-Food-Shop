@@ -158,5 +158,34 @@ class DogFoodApi {
     }
     return response.json()
   }
+
+  async getComments(productId, token) {
+    const response = await fetch(`${this.baseUrl}/products/review/${productId}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при получении отзывов. ${response.statusText}.`)
+    }
+
+    return response.json()
+  }
+
+  async addComment(productId, data, token) {
+    const response = await fetch(`${this.baseUrl}/products/review/${productId}`, {
+      method: 'PUT',
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при сохранении отзыва. ${response.statusText}.`)
+    }
+    return response.json()
+  }
 }
 export const DogFoodApiConst = new DogFoodApi({ baseUrl: 'https://api.react-learning.ru' })

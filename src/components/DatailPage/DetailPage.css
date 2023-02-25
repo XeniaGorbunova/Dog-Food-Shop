@@ -8,15 +8,8 @@
   height: 18px;
 }
 
-button__star {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
 .on {
-  color: #000;
+  color: gold;
 }
 
 .off {

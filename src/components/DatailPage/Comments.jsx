@@ -27,7 +27,10 @@ function StarRating({ rating, setRating }) {
           <button
             type="button"
             key={index}
-            className={index <= (hover || rating) ? 'button__star on' : 'button__star off'}
+            style={{
+              backgroundColor: 'white', border: 'none', outline: 'none', cursor: 'pointer',
+            }}
+            className={index <= (hover || rating) ? 'on' : 'off'}
             onClick={() => setRating(index)}
             onMouseEnter={() => setHover(index)}
             onMouseLeave={() => setHover(rating)}
@@ -70,7 +73,7 @@ function Comments({ id, reloadKey, setReloadKey }) {
   if (isEditError) return <p>{`${errorEdit} `}</p>
 
   return (
-    <div className="d-flex flex-column" style={{ width: '70%', paddingBottom: '90px' }}>
+    <div className="d-flex flex-column" style={{ width: '70%', paddingBottom: '90px', maxWidth: '750px' }}>
       <h5>Отзывы</h5>
       <Formik
         initialValues={initialValues}
@@ -94,14 +97,15 @@ function Comments({ id, reloadKey, setReloadKey }) {
         </Form>
       </Formik>
       {data.map((item) => (
-        <div className="comment mt-4 text-justify float-left">
-          <div className="d-flex flex-row gap-3 mb-1">
+        <div className="comment mt-2 text-justify float-left">
+          <div className="d-flex flex-row gap-2 mb-1">
             <img src={item.author.avatar} alt="" className="rounded-circle" width="40" height="40" />
             <h4>{item.author.name}</h4>
           </div>
           <small>{dayjs(item.created_at).format('YYYY-MM-DD HH:mm:ss')}</small>
           <br />
           <p>{item.text}</p>
+          <StarRating rating={item.rating} setRating={setRating} />
         </div>
       ))}
     </div>

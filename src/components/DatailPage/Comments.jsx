@@ -17,8 +17,7 @@ import { getQueryCommentsKey } from '../Products/utils'
 import './DetailPage.css'
 import { getTokenSelector } from '../../redux/slices/userSlice'
 
-function StarRating() {
-  const [rating, setRating] = useState(0)
+function StarRating({ rating, setRating }) {
   const [hover, setHover] = useState(0)
   return (
     <div className="star-rating mb-2">
@@ -43,8 +42,10 @@ function StarRating() {
 
 function Comments({ id, reloadKey, setReloadKey }) {
   const userToken = useSelector(getTokenSelector)
+  const [rating, setRating] = useState(5)
   const initialValues = {
-    comment: '',
+    text: '',
+    rating,
   }
   const {
     data, isLoading, isError, error,
@@ -58,11 +59,11 @@ function Comments({ id, reloadKey, setReloadKey }) {
   const {
     mutateAsync, isLoading: isEditLoading, isError: isEditError, error: errorEdit,
   } = useMutation({
-    mutationFn: (comment) => DogFoodApiConst.addComment(id, comment),
+    mutationFn: (comment) => DogFoodApiConst.addComment(id, comment, userToken),
   })
 
   const handleSubmit = async (values) => {
-    await mutateAsync(id, values)
+    await mutateAsync(values)
     setReloadKey(reloadKey + 1)
   }
   if (isLoading || isEditLoading) return <Loader />
@@ -80,13 +81,13 @@ function Comments({ id, reloadKey, setReloadKey }) {
         <Form className="d-flex flex-column">
           <Field
             className="mb-3 form-control"
-            name="comment"
+            name="text"
             type="text"
             placeholder="Оставьте свой отзыв"
           />
-          <ErrorMessage component="p" className="error" name="comment" />
+          <ErrorMessage component="p" className="error" name="text" />
           <div className="d-flex flex-row justify-content-between">
-            <StarRating />
+            <StarRating rating={rating} setRating={setRating} />
             <button type="submit" disabled={isLoading} className="btn btn-primary">
               Сохранить
             </button>

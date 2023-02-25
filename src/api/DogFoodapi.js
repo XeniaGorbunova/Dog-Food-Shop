@@ -175,7 +175,7 @@ class DogFoodApi {
 
   async addComment(productId, data, token) {
     const response = await fetch(`${this.baseUrl}/products/review/${productId}`, {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         authorization: `Bearer ${token}`,
         'Content-type': 'application/json',

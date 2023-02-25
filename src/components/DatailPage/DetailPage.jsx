@@ -90,7 +90,7 @@ function DetailPage() {
   const isAuthor = (email === data.author.email)
   return (
     <>
-      <div className="card m-5" style={{ width: '70%', paddingBottom: '80px' }}>
+      <div className="card m-5" style={{ width: '70%' }}>
         <Formik
           initialValues={initialValues}
           validationSchema={ProductValidationSchema}

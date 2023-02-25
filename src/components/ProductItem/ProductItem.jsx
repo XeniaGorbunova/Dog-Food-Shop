@@ -31,7 +31,7 @@ function ProductItem({
   const isInCart = (productListId) => cartProducts.find((product) => product.id === productListId)
   return (
     <motion.li
-      className="card m-2 product_card p-2"
+      className="card m-3 product_card p-2"
       onClick={navigateToDetailsHandler}
       whileHover={{
         scale: 1.05,

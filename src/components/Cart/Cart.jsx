@@ -67,7 +67,7 @@ function Cart() {
   if (isError) return <p>{`${error} `}</p>
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%' }} className="d-flex align-items-center justify-content-center">
       {!cart[0] && (
       <div className="d-flex align-items-center justify-content-center flex-column mt-5">
         <h1>Ваша корзина пуста</h1>
@@ -80,7 +80,7 @@ function Cart() {
       )}
 
       {cartProducts[0] && (
-        <div className="d-flex flex-row justify-content-between" style={{ width: '100%', marginBottom: '100px' }}>
+        <div className="d-flex flex-row justify-content-between" style={{ width: '70%', marginBottom: '100px' }}>
           <div
             className="d-flex p-2 flex-column"
             style={{ width: '70%' }}

@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Form, Formik } from 'formik'
 import { motion } from 'framer-motion'
-import DeleteItemModal from '../CartItem/DeleteItemModal'
+// import DeleteItemModal from '../CartItem/DeleteItemModal'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import { getQueryProductKey } from '../Products/utils'
 import { getTokenSelector } from '../../redux/slices/userSlice'
@@ -22,14 +22,17 @@ import cart from '../../assets/cart.svg'
 import pen from '../../assets/pen.svg'
 import trash from '../../assets/trash.svg'
 import { addNewProduct, deleteProduct, getAllCartProductsSelector } from '../../redux/slices/cartSlice'
+import SuccessModal from './SuccessModal'
 
 function DetailPage() {
   const { id } = useParams()
   const dispatch = useDispatch()
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
-  const openDeleteModalHandler = () => {
-    setIsDeleteModalOpen(true)
-  }
+  const [action, setAction] = useState('')
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
+  // const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  // const openDeleteModalHandler = () => {
+  //   setIsDeleteModalOpen(true)
+  // }
   const navigate = useNavigate()
   const userToken = useSelector(getTokenSelector)
   const [reloadKey, setReloadKey] = useState(0)
@@ -56,19 +59,36 @@ function DetailPage() {
     mutationFn: (dataEdit) => DogFoodApiConst.editProduct(id, dataEdit, userToken),
   })
 
+  const {
+    mutateAsync: deleteMutateAsync, isLoading: isDeleteLoading, isError: isDeleteError, error: errorDelete,
+  } = useMutation({
+    mutationFn: () => DogFoodApiConst.deleteProduct(id, userToken)
+      .then(() => {
+        setAction('удалили')
+        setIsSuccessModalOpen(true)
+      }),
+  })
+
   const handleSubmit = async (values) => {
     await mutateAsync(values)
     setReloadKey(reloadKey + 1)
   }
+
+  const handleDelete = async () => {
+    await deleteMutateAsync()
+    navigate('/products')
+  }
+
   const moveToCartHandler = () => {
     dispatch(addNewProduct(id))
   }
   const removeFromCartHandler = () => {
     dispatch(deleteProduct(id))
   }
-  if (isLoading || isEditLoading) return <Loader />
+  if (isLoading || isEditLoading || isDeleteLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>
   if (isEditError) return <p>{`${errorEdit} `}</p>
+  if (isDeleteError) return <p>{`${errorDelete} `}</p>
 
   const initialValues = {
     name: data.name ? data.name : '',
@@ -144,7 +164,7 @@ function DetailPage() {
                   scale: 0.9,
                 }}
                 className="btn btn-primary"
-                onClick={openDeleteModalHandler}
+                onClick={handleDelete}
               >
                 <img src={trash} alt="delete" style={{ width: '25px', height: '25px' }} />
               </motion.button>
@@ -179,12 +199,17 @@ function DetailPage() {
               </motion.button>
             </div>
           </div>
-          <DeleteItemModal
+          <SuccessModal
+            isOpen={isSuccessModalOpen}
+            setIsSuccessModalOpen={setIsSuccessModalOpen}
+            action={action}
+          />
+          {/* <DeleteItemModal
             isOpen={isDeleteModalOpen}
             setIsDeleteModalOpen={setIsDeleteModalOpen}
             title={data.name}
             id={id}
-          />
+          /> */}
         </Form>
       </Formik>
     </div>

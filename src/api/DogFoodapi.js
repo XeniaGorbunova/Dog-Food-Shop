@@ -102,7 +102,7 @@ class DogFoodApi {
     return response.json()
   }
 
-  async deleteProduct(productId, data, token) {
+  async deleteProduct(productId, token) {
     const response = await fetch(`${this.baseUrl}/products/${productId}`, {
       method: 'DELETE',
       headers: {

@@ -32,7 +32,6 @@ function CartItem({
   const decrementCountHandler = () => {
     if (count > 0) { dispatch(productDecrement(id)) }
   }
-  console.log({ count })
   return (
     <motion.li
       className="card"

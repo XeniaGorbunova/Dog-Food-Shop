@@ -54,7 +54,6 @@ function Comments({ id, reloadKey, setReloadKey }) {
     queryFn: () => DogFoodApiConst.getComments(id, userToken),
     enabled: !!(userToken),
   })
-  console.log({ comments: data })
 
   const {
     mutateAsync, isLoading: isEditLoading, isError: isEditError, error: errorEdit,

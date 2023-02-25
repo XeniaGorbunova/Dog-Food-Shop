@@ -32,7 +32,6 @@ function Cart() {
     queryFn: () => DogFoodApiConst.getProductsByIds(cart.map((product) => product.id), userToken),
     enabled: !!(userToken),
   })
-  console.log(cartProducts)
   const clearCartHandler = () => {
     dispatch(clearCart())
   }

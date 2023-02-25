@@ -12,7 +12,7 @@ import cart from '../../assets/cart.svg'
 import { addNewProduct, deleteProduct, getAllCartProductsSelector } from '../../redux/slices/cartSlice'
 
 function FavoriteItem({
-  name, pictures, price, id, description, stock, discount, count,
+  name, pictures, price, id, description, stock, discount,
 }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -28,7 +28,6 @@ function FavoriteItem({
     if (label !== 'notNavigate') navigate(`/product/${id}`)
   }
   const isInCart = (productListId) => cartProducts.find((product) => product.id === productListId)
-  console.log({ count })
   return (
     <motion.li
       whileHover={{

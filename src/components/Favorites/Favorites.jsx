@@ -30,7 +30,6 @@ function FavoritesPage() {
     queryFn: () => DogFoodApiConst.getProductsByIds(favorites, userToken),
     enabled: !!(userToken),
   })
-  // console.log(cartProducts)
   const clearFavoritesHandler = () => {
     dispatch(clearFavorites())
   }

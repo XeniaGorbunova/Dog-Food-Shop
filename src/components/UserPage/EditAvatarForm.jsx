@@ -15,7 +15,6 @@ function EditAvatarForm({
 }) {
   const userToken = useSelector(getTokenSelector)
   const { group } = useSelector(getUserSelector)
-  console.log(userAvatar)
 
   const {
     mutateAsync, isLoading, isError, error,

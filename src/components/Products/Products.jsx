@@ -16,7 +16,6 @@ function ProductsInner({ data }) {
   let products = [...data]
   const [searchParams] = useSearchParams()
   const currentFilterName = searchParams.get('filterName')
-  console.log(currentFilterName)
   switch (currentFilterName) {
     case null:
       products = [...data]
@@ -99,8 +98,6 @@ const ProductsInnerWithQuery = withQuery(ProductsInner)
 function Products() {
   const userToken = useSelector(getTokenSelector)
   const navigate = useNavigate()
-
-  console.log({ userToken })
   useEffect(() => {
     if (!userToken) {
       navigate('/signin')
@@ -115,7 +112,6 @@ function Products() {
     queryFn: () => DogFoodApiConst.getAllProducts(search, userToken),
     enabled: !!(userToken),
   })
-  console.log({ data })
 
   return <ProductsInnerWithQuery data={data} isLoading={isLoading} isError={isError} refetch={refetch} error={error} />
 }

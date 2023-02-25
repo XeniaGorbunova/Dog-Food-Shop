@@ -28,7 +28,6 @@ const AddProductModal = ({
     mutationFn: (dataEdit) => DogFoodApiConst.addProduct(dataEdit, userToken)
       .then((data) => {
         setIsAddModalOpen(false)
-        console.log(data._id)
         setTimeout(() => navigate(`/product/${data._id}`))
       }),
   })

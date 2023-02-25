@@ -17,7 +17,6 @@ function ProductsInner({ data }) {
   const [searchParams] = useSearchParams()
   const currentFilterName = searchParams.get('filterName')
   console.log(currentFilterName)
-  // useEffect(() => {
   switch (currentFilterName) {
     case null:
       products = [...data]
@@ -72,9 +71,8 @@ function ProductsInner({ data }) {
     default:
       break
   }
-  // }, [currentFilterName, products])
   return (
-    <div>
+    <div style={{ paddingBottom: '90px' }}>
       {products[0] && (
       <ul className="d-flex p-2 flex-wrap align-items-center justify-content-around">
         {products.map((product) => (

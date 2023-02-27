@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: center / cover url(../../assets/dogs.jpg);
+  background: center / cover url(../../assets/lovelyDogs.jpg);
 }
 
 .opacity {

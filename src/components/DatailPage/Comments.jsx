@@ -65,7 +65,7 @@ function Comments({ id, reloadKey, setReloadKey }) {
   })
 
   const handleSubmit = async (values) => {
-    await mutateAsync(values)
+    await mutateAsync({ ...values, rating })
     setReloadKey(reloadKey + 1)
   }
   if (isLoading || isEditLoading) return <Loader />
@@ -97,7 +97,7 @@ function Comments({ id, reloadKey, setReloadKey }) {
         </Form>
       </Formik>
       {data.map((item) => (
-        <div className="comment mt-2 text-justify float-left">
+        <div className="comment mt-2 text-justify float-left" key={item.created_at}>
           <div className="d-flex flex-row gap-2 mb-1">
             <img src={item.author.avatar} alt="" className="rounded-circle" width="40" height="40" />
             <h4>{item.author.name}</h4>

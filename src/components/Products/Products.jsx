@@ -14,6 +14,7 @@ import { getTokenSelector } from '../../redux/slices/userSlice'
 
 function ProductsInner({ data }) {
   let products = [...data]
+  console.log(products)
   const [searchParams] = useSearchParams()
   const currentFilterName = searchParams.get('filterName')
   switch (currentFilterName) {
@@ -82,6 +83,7 @@ function ProductsInner({ data }) {
             price={product.price}
             pictures={product.pictures}
             discount={product.discount}
+            weight={product.wight}
           />
         ))}
       </ul>

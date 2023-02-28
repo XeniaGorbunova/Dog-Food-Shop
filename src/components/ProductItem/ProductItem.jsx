@@ -13,7 +13,7 @@ import redHeart from '../../assets/redHeart.svg'
 import { addFavorite, getAllFavoriteProductsSelector, removeFavorite } from '../../redux/slices/favoriteSlice'
 
 function ProductItem({
-  name, pictures, price, id, discount,
+  name, pictures, price, id, discount, weight,
 }) {
   const cartProducts = useSelector(getAllCartProductsSelector)
   const favorites = useSelector(getAllFavoriteProductsSelector)
@@ -59,13 +59,13 @@ function ProductItem({
         />
       )}
       <div className="card-body" style={{ minWidth: '270px' }}>
-        <h5 className="card-title" style={{ maxHeight: '48px', overflow: 'hidden' }}>{name}</h5>
+        <h5 className="card-title" style={{ minHeight: '48px', overflow: 'hidden' }}>{name}</h5>
         <div className="d-flex flex-row align-items-center justify-content-between">
-          <p className="card-text mb-0">
+          <b className="card-text mb-0 mt-1">
             {price}
             {' '}
             ₽
-          </p>
+          </b>
           {discount > 0 && (
           <span className="badge rounded-pill bg-info text-dark">
             -
@@ -76,6 +76,7 @@ function ProductItem({
           </span>
           )}
         </div>
+        <small className="mb-2">{weight}</small>
         <motion.button
           type="button"
           data-label="notNavigate"

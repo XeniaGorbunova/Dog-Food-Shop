@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Link, useNavigate } from 'react-router-dom'
 import '../../index.css'
 import { useEffect } from 'react'
+import { motion } from 'framer-motion'
 import {
   clearCart, getAllCartProductsSelector, notPickAllProducts, pickAllProducts,
 } from '../../redux/slices/cartSlice'
@@ -72,9 +73,19 @@ function Cart() {
       <div className="d-flex align-items-center justify-content-center flex-column mt-5">
         <h1>Ваша корзина пуста</h1>
         <Link to="/products">
-          <button type="button" className="btn btn-primary mt-4">
+          <motion.button
+            whileHover={{
+              scale: 1.1,
+            }}
+            whileTap={{
+              scale: 0.9,
+            }}
+            type="button"
+            className="btn btn-primary mt-4"
+          >
             перейти к покупкам
-          </button>
+          </motion.button>
+
         </Link>
       </div>
       )}

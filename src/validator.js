@@ -33,20 +33,20 @@ export const UserEditValidationSchema = Yup.object({
 
 export const UserEditAvatarValidationSchema = Yup.object({
   avatar: Yup.string()
-    .matches(
-      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Введите корректную ссылку',
-    )
+    // .matches(
+    //   /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    //   'Введите корректную ссылку',
+    // )
     .required('Поле обязательно'),
 })
 
 export const ProductValidationSchema = Yup.object({
   available: Yup.boolean(),
   pictures: Yup.string()
-    .matches(
-      /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-      'Введите корректную ссылку',
-    )
+    // .matches(
+    //   /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+    //   'Введите корректную ссылку',
+    // )
     .required('Поле обязательно'),
   name: Yup.string()
     .required('Поле обязательно'),

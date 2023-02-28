@@ -59,7 +59,7 @@ function ProductItem({
         />
       )}
       <div className="card-body" style={{ minWidth: '270px' }}>
-        <h5 className="card-title" style={{ minHeight: '48px', overflow: 'hidden' }}>{name}</h5>
+        <h5 className="card-title" style={{ height: '48px', overflow: 'hidden' }}>{name}</h5>
         <div className="d-flex flex-row align-items-center justify-content-between">
           <b className="card-text mb-0 mt-1">
             {price}

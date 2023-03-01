@@ -1,5 +1,5 @@
 export const getQuerySearchKey = (search) => ['productsfetch', search]
 export const getQueryCartKey = (cart) => ['cart', cart]
-export const getQueryUserKey = (reloadKey) => ['user', reloadKey]
-export const getQueryProductKey = (reloadKey) => ['product', reloadKey]
-export const getQueryCommentsKey = (reloadKey) => ['comments', reloadKey]
+export const getQueryUserKey = () => ['user']
+export const getQueryProductKey = () => ['product']
+export const getQueryCommentsKey = () => ['comments']

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-underscore-dangle */
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik'
@@ -11,14 +11,16 @@ import { getTokenSelector } from '../../redux/slices/userSlice'
 import { ProductValidationSchema } from '../../validator'
 import Loader from '../Loader/Loader'
 import Modal from '../Modal/Modal'
+import { getQueryProductKey } from '../Products/utils'
 
 /* eslint-disable react/function-component-definition */
 const EditProductModal = ({
-  setIsEditModalOpen, isOpen, name, price, pictures, reloadKey,
-  available, stock, discount, description, wight, id, setReloadKey,
+  setIsEditModalOpen, isOpen, name, price, pictures,
+  available, stock, discount, description, wight, id,
 }) => {
   const navigate = useNavigate()
   const userToken = useSelector(getTokenSelector)
+  const queryClient = useQueryClient()
   const closeEditModalHandler = () => {
     setIsEditModalOpen(false)
   }
@@ -28,8 +30,8 @@ const EditProductModal = ({
     mutationFn: (dataEdit) => DogFoodApiConst.editProduct(id, dataEdit, userToken)
       .then((data) => {
         setIsEditModalOpen(false)
-        setReloadKey(reloadKey + 1)
-        setTimeout(() => navigate(`/product/${data._id}`))
+        queryClient.invalidateQueries({ queryKey: getQueryProductKey() })
+        navigate(`/product/${data._id}`)
       }),
   })
   const initialValues = {

@@ -4,7 +4,7 @@
 // import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import dayjs from 'dayjs'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
@@ -43,8 +43,9 @@ function StarRating({ rating, setRating }) {
   )
 }
 
-function Comments({ id, reloadKey, setReloadKey }) {
+function Comments({ id }) {
   const userToken = useSelector(getTokenSelector)
+  const queryClient = useQueryClient()
   const [rating, setRating] = useState(5)
   const initialValues = {
     text: '',
@@ -53,7 +54,7 @@ function Comments({ id, reloadKey, setReloadKey }) {
   const {
     data, isLoading, isError, error,
   } = useQuery({
-    queryKey: getQueryCommentsKey(reloadKey),
+    queryKey: getQueryCommentsKey(),
     queryFn: () => DogFoodApiConst.getComments(id, userToken),
     enabled: !!(userToken),
   })
@@ -61,12 +62,12 @@ function Comments({ id, reloadKey, setReloadKey }) {
   const {
     mutateAsync, isLoading: isEditLoading, isError: isEditError, error: errorEdit,
   } = useMutation({
-    mutationFn: (comment) => DogFoodApiConst.addComment(id, comment, userToken),
+    mutationFn: (comment) => DogFoodApiConst.addComment(id, comment, userToken)
+      .then(() => queryClient.invalidateQueries({ queryKey: getQueryCommentsKey() })),
   })
 
   const handleSubmit = async (values) => {
     await mutateAsync({ ...values, rating })
-    setReloadKey(reloadKey + 1)
   }
   if (isLoading || isEditLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>

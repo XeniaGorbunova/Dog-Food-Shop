@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable max-len */
 import { useNavigate } from 'react-router-dom'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
@@ -18,12 +18,12 @@ import { getTokenSelector, getUserSelector } from '../../redux/slices/userSlice'
 import EditAvatarForm from './EditAvatarForm'
 
 function UserPage() {
-  // const { id } = useParams()
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
+
   const userToken = useSelector(getTokenSelector)
   const { group } = useSelector(getUserSelector)
   const [isAvatarEditing, setIsAvatarEditing] = useState(false)
-  const [reloadKey, setReloadKey] = useState(0)
   useEffect(() => {
     if (!userToken) {
       navigate('/signin')
@@ -33,7 +33,7 @@ function UserPage() {
   const {
     data, isLoading, isError, error,
   } = useQuery({
-    queryKey: getQueryUserKey(reloadKey),
+    queryKey: getQueryUserKey(),
     queryFn: () => DogFoodApiConst.getUser(group, userToken),
     enabled: !!(userToken),
   })
@@ -42,12 +42,11 @@ function UserPage() {
     mutateAsync, isLoading: isEditLoading, isError: isEditError, error: errorEdit,
   } = useMutation({
     mutationFn: (dataEdit) => DogFoodApiConst.editUserInfo(group, dataEdit, userToken)
-      .then(() => setReloadKey(reloadKey + 1)),
+      .then(() => queryClient.invalidateQueries({ queryKey: getQueryUserKey() })),
   })
 
   const handleSubmit = async (values) => {
     await mutateAsync(values)
-    setReloadKey(reloadKey + 1)
   }
   const handleAvatarEdit = () => {
     setIsAvatarEditing(!isAvatarEditing)
@@ -67,8 +66,6 @@ function UserPage() {
         {isAvatarEditing && (
         <EditAvatarForm
           userAvatar={data.avatar}
-          setReloadKey={setReloadKey}
-          reloadKey={reloadKey}
           isAvatarEditing={isAvatarEditing}
           setIsAvatarEditing={setIsAvatarEditing}
         />

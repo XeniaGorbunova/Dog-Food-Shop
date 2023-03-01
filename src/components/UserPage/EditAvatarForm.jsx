@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik'
@@ -8,23 +8,25 @@ import '../../index.css'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import Loader from '../Loader/Loader'
 import { getTokenSelector, getUserSelector } from '../../redux/slices/userSlice'
+import { getQueryUserKey } from '../Products/utils'
 
 function EditAvatarForm({
-  userAvatar, setReloadKey, reloadKey,
+  userAvatar,
   setIsAvatarEditing, isAvatarEditing,
 }) {
   const userToken = useSelector(getTokenSelector)
   const { group } = useSelector(getUserSelector)
+  const queryClient = useQueryClient()
 
   const {
     mutateAsync, isLoading, isError, error,
   } = useMutation({
-    mutationFn: (dataEdit) => DogFoodApiConst.editUserAvatar(group, dataEdit, userToken),
+    mutationFn: (dataEdit) => DogFoodApiConst.editUserAvatar(group, dataEdit, userToken)
+      .then(() => queryClient.invalidateQueries({ queryKey: getQueryUserKey() })),
   })
 
   const handleSubmit = async (values) => {
     await mutateAsync(values)
-    setReloadKey(reloadKey + 1)
     setIsAvatarEditing(!isAvatarEditing)
   }
 

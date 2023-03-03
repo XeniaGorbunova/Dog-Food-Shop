@@ -67,6 +67,17 @@ function ProductsInner({ data }) {
         return 0
       })
       break
+    case 'Популярное':
+      products = products.sort((item, nextItem) => {
+        if (item.likes.length > nextItem.likes.length) {
+          return -1
+        }
+        if (item.likes.length < nextItem.likes.length) {
+          return 1
+        }
+        return 0
+      })
+      break
 
     default:
       break

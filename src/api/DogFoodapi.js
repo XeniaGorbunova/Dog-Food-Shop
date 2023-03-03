@@ -187,5 +187,18 @@ class DogFoodApi {
     }
     return response.json()
   }
+
+  async deleteComment(productId, reviewId, token) {
+    const response = await fetch(`${this.baseUrl}/products/review/${productId}/${reviewId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    if (response.status >= 400) {
+      throw new Error(`${response.status}: Произошла ошибка при удалении отзыва. ${response.statusText}.`)
+    }
+    return response.json()
+  }
 }
 export const DogFoodApiConst = new DogFoodApi({ baseUrl: 'https://api.react-learning.ru' })

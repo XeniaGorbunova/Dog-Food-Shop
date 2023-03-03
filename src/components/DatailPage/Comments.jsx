@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
@@ -15,7 +16,8 @@ import { DogFoodApiConst } from '../../api/DogFoodapi'
 import Loader from '../Loader/Loader'
 import { getQueryCommentsKey } from '../Products/utils'
 import './DetailPage.css'
-import { getTokenSelector } from '../../redux/slices/userSlice'
+import { getTokenSelector, getUserSelector } from '../../redux/slices/userSlice'
+import trash from '../../assets/trash.svg'
 
 function StarRating({ rating, setRating }) {
   const [hover, setHover] = useState(0)
@@ -45,6 +47,7 @@ function StarRating({ rating, setRating }) {
 
 function Comments({ id }) {
   const userToken = useSelector(getTokenSelector)
+  const { email } = useSelector(getUserSelector)
   const queryClient = useQueryClient()
   const [rating, setRating] = useState(5)
   const initialValues = {
@@ -59,6 +62,8 @@ function Comments({ id }) {
     enabled: !!(userToken),
   })
 
+  console.log(data)
+
   const {
     mutateAsync, isLoading: isEditLoading, isError: isEditError, error: errorEdit,
   } = useMutation({
@@ -66,12 +71,24 @@ function Comments({ id }) {
       .then(() => queryClient.invalidateQueries({ queryKey: getQueryCommentsKey() })),
   })
 
+  const {
+    mutateAsync: mutateDeleteAsync, isLoading: isDeleteLoading, isError: isDeleteError, error: errorDelete,
+  } = useMutation({
+    mutationFn: (reviewId) => DogFoodApiConst.deleteComment(id, reviewId, userToken)
+      .then(() => queryClient.invalidateQueries({ queryKey: getQueryCommentsKey() })),
+  })
+
   const handleSubmit = async (values) => {
     await mutateAsync({ ...values, rating })
   }
-  if (isLoading || isEditLoading) return <Loader />
+
+  const handleDelete = async (reviewId) => {
+    await mutateDeleteAsync(reviewId)
+  }
+  if (isLoading || isEditLoading || isDeleteLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>
   if (isEditError) return <p>{`${errorEdit} `}</p>
+  if (isDeleteError) return <p>{`${errorDelete} `}</p>
 
   return (
     <div className="d-flex flex-column" style={{ width: '70%', paddingBottom: '90px', maxWidth: '750px' }}>
@@ -105,7 +122,14 @@ function Comments({ id }) {
           </div>
           <small>{dayjs(item.created_at).format('YYYY-MM-DD HH:mm:ss')}</small>
           <br />
-          <p>{item.text}</p>
+          <div className="d-flex flex-row justify-content-between align-items-center mb-1">
+            <p>{item.text}</p>
+            {item.author.email === email && (
+            <button onClick={() => handleDelete(item._id)} className="btn" type="button">
+              <img src={trash} alt="delete" />
+            </button>
+            )}
+          </div>
           <StarRating rating={item.rating} setRating={setRating} />
         </div>
       ))}

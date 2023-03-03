@@ -27,7 +27,6 @@ import Comments from './Comments'
 function DetailPage() {
   const { id } = useParams()
   const dispatch = useDispatch()
-  // const [action, setAction] = useState('')
   // const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
@@ -173,7 +172,6 @@ function DetailPage() {
           {/* <SuccessModal
       isOpen={isSuccessModalOpen}
       setIsSuccessModalOpen={setIsSuccessModalOpen}
-      action={action}
     /> */}
           <EditProductModal
             isOpen={isEditModalOpen}

@@ -1,8 +1,10 @@
 import { useMutation } from '@tanstack/react-query'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
+import { deleteProduct } from '../../redux/slices/cartSlice'
+import { removeFavorite } from '../../redux/slices/favoriteSlice'
 import { getTokenSelector } from '../../redux/slices/userSlice'
 import Loader from '../Loader/Loader'
 import Modal from '../Modal/Modal'
@@ -13,6 +15,7 @@ const DeleteProductModal = ({
   setIsDeleteModalOpen, isOpen, id, title,
 }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [action, setAction] = useState('')
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
@@ -31,6 +34,8 @@ const DeleteProductModal = ({
     setIsDeleteModalOpen(false)
   }
   const deleteHandler = async () => {
+    dispatch(deleteProduct(id))
+    dispatch(removeFavorite(id))
     await mutateAsync()
     navigate('/products')
   }

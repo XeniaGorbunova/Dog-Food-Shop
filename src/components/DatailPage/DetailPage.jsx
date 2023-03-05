@@ -44,7 +44,7 @@ function DetailPage() {
   const {
     data, isLoading, isError, error,
   } = useQuery({
-    queryKey: getQueryProductKey(),
+    queryKey: getQueryProductKey(id),
     queryFn: () => DogFoodApiConst.getProduct(id, userToken),
     enabled: !!(userToken),
   })

@@ -30,7 +30,7 @@ const EditProductModal = ({
     mutationFn: (dataEdit) => DogFoodApiConst.editProduct(id, dataEdit, userToken)
       .then((data) => {
         setIsEditModalOpen(false)
-        queryClient.invalidateQueries({ queryKey: getQueryProductKey() })
+        queryClient.invalidateQueries({ queryKey: getQueryProductKey(id) })
         navigate(`/product/${data._id}`)
       }),
   })

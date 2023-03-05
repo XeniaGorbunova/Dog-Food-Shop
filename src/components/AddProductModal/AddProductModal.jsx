@@ -12,12 +12,14 @@ import { getTokenSelector } from '../../redux/slices/userSlice'
 import { ProductValidationSchema } from '../../validator'
 import Loader from '../Loader/Loader'
 import Modal from '../Modal/Modal'
+// import { getQueryProductKey } from '../Products/utils'
 
 /* eslint-disable react/function-component-definition */
 const AddProductModal = ({
   setIsAddModalOpen, isOpen,
 }) => {
   const navigate = useNavigate()
+  // const queryClient = useQueryClient()
   const userToken = useSelector(getTokenSelector)
   const closeAddModalHandler = () => {
     setIsAddModalOpen(false)
@@ -28,7 +30,8 @@ const AddProductModal = ({
     mutationFn: (dataEdit) => DogFoodApiConst.addProduct(dataEdit, userToken)
       .then((data) => {
         setIsAddModalOpen(false)
-        setTimeout(() => navigate(`/product/${data._id}`))
+        // queryClient.invalidateQueries({ queryKey: getQueryProductKey(dataid) })
+        navigate(`/product/${data._id}`)
       }),
   })
   const initialValues = {

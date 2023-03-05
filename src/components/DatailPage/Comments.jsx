@@ -61,8 +61,6 @@ function Comments({ id }) {
     enabled: !!(userToken),
   })
 
-  console.log(data)
-
   const {
     mutateAsync, isLoading: isEditLoading, isError: isEditError, error: errorEdit,
   } = useMutation({

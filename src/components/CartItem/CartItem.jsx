@@ -8,7 +8,7 @@ import {
   changeIsPickProduct, productDecrement, productIncrement,
 } from '../../redux/slices/cartSlice'
 import minus from '../../assets/minus.svg'
-import { ReactComponent as Plus } from '../../assets/plus.svg'
+// import { ReactComponent as Plus } from '../../assets/plus.svg'
 import DeleteItemModal from './DeleteItemModal'
 
 function CartItem({
@@ -76,9 +76,9 @@ function CartItem({
             </button>
 
             <h4 data-label="notNavigate">{count}</h4>
-            <button type="button" className="btn btn-light" onClick={incrementCountHandler} data-label="notNavigate">
+            <button type="button" className="btn btn-light number__icon" onClick={incrementCountHandler} data-label="notNavigate">
               {/* <img src={plus} alt="plus" data-label="notNavigate" className="number__icon" /> */}
-              <Plus className="number__icon" />
+              {/* <Plus className="number__icon" /> */}
             </button>
           </div>
           <button type="button" data-label="notNavigate" className="btn btn-primary" onClick={openDeleteModalHandler}>Удалить</button>

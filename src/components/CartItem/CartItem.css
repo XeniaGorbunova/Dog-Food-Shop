@@ -3,8 +3,8 @@
   height: 10rem;
 }
 
-.number__icon {
-  width: 18px;
-  height: 18px;
-  background-image: url('../../assets/plus.svg');
+.number-plus__icon {
+  width: 44px;
+  height: 38px;
+  background: center / contain no-repeat url('/src/assets/plus.svg');
 }

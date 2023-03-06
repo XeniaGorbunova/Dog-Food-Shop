@@ -1,3 +1,4 @@
+/* eslint-disable import/no-absolute-path */
 /* eslint-disable max-len */
 import './CartItem.css'
 import { useDispatch } from 'react-redux'
@@ -8,7 +9,7 @@ import {
   changeIsPickProduct, productDecrement, productIncrement,
 } from '../../redux/slices/cartSlice'
 import minus from '../../assets/minus.svg'
-// import plus from '../../assets/plus.svg'
+// import plus from '/Users/Паша/Desktop/Проги/Сберуниверситет/Projects/dog-food/src/assets/plus.svg'
 import DeleteItemModal from './DeleteItemModal'
 
 function CartItem({

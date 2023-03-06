@@ -31,31 +31,31 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: '/signup',
+        path: '/Dog-Food-Shop/signup',
         element: <SignUp />,
       },
       {
-        path: '/signin',
+        path: '/Dog-Food-Shop/signin',
         element: <SignIn />,
       },
       {
-        path: '/products',
+        path: '/Dog-Food-Shop/products',
         element: <Cathalog />,
       },
       {
-        path: '/cart',
+        path: '/Dog-Food-Shop/cart',
         element: <Cart />,
       },
       {
-        path: '/product/:id',
+        path: '/Dog-Food-Shop/product/:id',
         element: <DetailPage />,
       },
       {
-        path: '/user/:id',
+        path: '/Dog-Food-Shop/user/:id',
         element: <UserPage />,
       },
       {
-        path: '/favorites',
+        path: '/Dog-Food-Shop/favorites',
         element: <FavoritesPage />,
       },
       {

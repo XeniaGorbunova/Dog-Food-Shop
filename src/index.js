@@ -23,7 +23,7 @@ import FavoritesPage from './components/Favorites/Favorites'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/Dog-Food-Shop/',
     element: <App />,
     children: [
       {

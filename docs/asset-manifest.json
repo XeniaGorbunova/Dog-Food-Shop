@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "./Dog-Food-Shop/static/css/main.e9b6b6cd.css",
-    "main.js": "./Dog-Food-Shop/static/js/main.118426fc.js",
+    "main.js": "./Dog-Food-Shop/static/js/main.4093a6dc.js",
     "static/media/lovelyDogs.jpg": "./Dog-Food-Shop/static/media/lovelyDogs.7f20c93bd3c388b9aa8f.jpg",
     "static/media/dogFace.svg": "./Dog-Food-Shop/static/media/dogFace.a68ed65b1a61fcf69f7accf524300c75.svg",
     "static/media/heart.svg": "./Dog-Food-Shop/static/media/heart.89b255136c18c07354ade20d6bf98df7.svg",
@@ -16,10 +16,10 @@
     "static/media/pen.svg": "./Dog-Food-Shop/static/media/pen.3f5fd2b5e3e7d08ef97bbb68e33774a5.svg",
     "static/media/person.svg": "./Dog-Food-Shop/static/media/person.b987e009f2d3ba3993fc93478e22b55e.svg",
     "main.e9b6b6cd.css.map": "./Dog-Food-Shop/static/css/main.e9b6b6cd.css.map",
-    "main.118426fc.js.map": "./Dog-Food-Shop/static/js/main.118426fc.js.map"
+    "main.4093a6dc.js.map": "./Dog-Food-Shop/static/js/main.4093a6dc.js.map"
   },
   "entrypoints": [
     "static/css/main.e9b6b6cd.css",
-    "static/js/main.118426fc.js"
+    "static/js/main.4093a6dc.js"
   ]
 }

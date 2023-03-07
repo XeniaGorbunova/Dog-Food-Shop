@@ -23,7 +23,7 @@ import FavoritesPage from './components/Favorites/Favorites'
 
 const router = createBrowserRouter([
   {
-    path: '/Dog-Food-Shop/',
+    path: '/',
     element: <App />,
     children: [
       {
@@ -31,31 +31,31 @@ const router = createBrowserRouter([
         element: <Main />,
       },
       {
-        path: '/Dog-Food-Shop/signup',
+        path: '/signup',
         element: <SignUp />,
       },
       {
-        path: '/Dog-Food-Shop/signin',
+        path: '/signin',
         element: <SignIn />,
       },
       {
-        path: '/Dog-Food-Shop/products',
+        path: '/products',
         element: <Cathalog />,
       },
       {
-        path: '/Dog-Food-Shop/cart',
+        path: '/cart',
         element: <Cart />,
       },
       {
-        path: '/Dog-Food-Shop/product/:id',
+        path: '/product/:id',
         element: <DetailPage />,
       },
       {
-        path: '/Dog-Food-Shop/user/:id',
+        path: '/user/:id',
         element: <UserPage />,
       },
       {
-        path: '/Dog-Food-Shop/favorites',
+        path: '/favorites',
         element: <FavoritesPage />,
       },
       {
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-])
+], { basename: '/Dog-Food-Shop' })
 
 const queryClient = new QueryClient({
   defaultOptions: {

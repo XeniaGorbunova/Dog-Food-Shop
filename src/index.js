@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-], { basename: '/Dog-Food-Shop' })
+])
 
 const queryClient = new QueryClient({
   defaultOptions: {

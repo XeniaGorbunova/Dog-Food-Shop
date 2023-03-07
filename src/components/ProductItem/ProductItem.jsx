@@ -26,7 +26,7 @@ function ProductItem({
     dispatch(deleteProduct(id))
   }
   const navigateToDetailsHandler = (event) => {
-    if (event.target.dataset.label !== 'notNavigate') navigate(`/Dog-Food-Shop/product/${id}`)
+    if (event.target.dataset.label !== 'notNavigate') navigate(`/product/${id}`)
   }
   const isInCart = (productListId) => cartProducts.find((product) => product.id === productListId)
   return (

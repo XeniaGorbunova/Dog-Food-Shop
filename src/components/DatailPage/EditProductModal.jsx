@@ -31,7 +31,7 @@ const EditProductModal = ({
       .then((data) => {
         setIsEditModalOpen(false)
         queryClient.invalidateQueries({ queryKey: getQueryProductKey(id) })
-        navigate(`/Dog-Food-Shop/product/${data._id}`)
+        navigate(`/product/${data._id}`)
       }),
   })
   const initialValues = {

@@ -25,7 +25,7 @@ function CartItem({
     dispatch(changeIsPickProduct(id))
   }
   const navigateToDetailsHandler = (event) => {
-    if (event.target.dataset.label !== 'notNavigate') navigate(`/Dog-Food-Shop/product/${id}`)
+    if (event.target.dataset.label !== 'notNavigate') navigate(`/product/${id}`)
   }
   const incrementCountHandler = () => {
     if (count < stock) { dispatch(productIncrement(id)) }

@@ -24,7 +24,7 @@ function Cart() {
   const getKey = cart.map((item) => item.id).toString()
   useEffect(() => {
     if (!userToken) {
-      navigate('/Dog-Food-Shop/signin')
+      navigate('/signin')
     }
   }, [userToken])
   const {
@@ -72,7 +72,7 @@ function Cart() {
       {!cart[0] && (
       <div className="d-flex align-items-center justify-content-center flex-column mt-5">
         <h1>Ваша корзина пуста</h1>
-        <Link to="/Dog-Food-Shop/products">
+        <Link to="/products">
           <motion.button
             whileHover={{
               scale: 1.1,

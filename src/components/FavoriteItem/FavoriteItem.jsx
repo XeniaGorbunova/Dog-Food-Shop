@@ -25,7 +25,7 @@ function FavoriteItem({
   }
   const navigateToDetailsHandler = (event) => {
     const { label } = event.target.dataset
-    if (label !== 'notNavigate') navigate(`/Dog-Food-Shop/product/${id}`)
+    if (label !== 'notNavigate') navigate(`/product/${id}`)
   }
   const isInCart = (productListId) => cartProducts.find((product) => product.id === productListId)
   return (

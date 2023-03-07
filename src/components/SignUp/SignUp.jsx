@@ -26,7 +26,7 @@ function SignUp() {
 
   const handleSubmit = async (values) => {
     await mutateAsync(values)
-    navigate('/Dog-Food-Shop/signin')
+    navigate('/signin')
   }
   if (isLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>

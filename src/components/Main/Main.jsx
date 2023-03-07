@@ -16,7 +16,7 @@ function Main() {
         >
           Лакомства для счастливых собак
         </motion.h1>
-        <Link to="/Dog-Food-Shop/products">
+        <Link to="/products">
           <motion.button
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}

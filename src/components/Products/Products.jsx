@@ -112,7 +112,7 @@ function Products() {
   const navigate = useNavigate()
   useEffect(() => {
     if (!userToken) {
-      navigate('/Dog-Food-Shop/signin')
+      navigate('/signin')
     }
   }, [userToken])
 

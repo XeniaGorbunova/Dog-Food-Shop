@@ -37,7 +37,7 @@ const DeleteProductModal = ({
     dispatch(deleteProduct(id))
     dispatch(removeFavorite(id))
     await mutateAsync()
-    navigate('/Dog-Food-Shop/products')
+    navigate('/products')
   }
   if (isLoading) return <Loader />
   if (isError) return <p>{`${error} `}</p>

@@ -21,7 +21,7 @@ function FavoritesPage() {
   const navigate = useNavigate()
   useEffect(() => {
     if (!userToken) {
-      navigate('/Dog-Food-Shop/signin')
+      navigate('/signin')
     }
   }, [userToken])
   const {
@@ -42,7 +42,7 @@ function FavoritesPage() {
       {!favorites[0] && (
       <div className="d-flex align-items-center justify-content-center flex-column mt-5">
         <h1>Вы ещё ничего не выбрали</h1>
-        <Link to="/Dog-Food-Shop/products">
+        <Link to="/products">
           <motion.button
             whileHover={{
               scale: 1.1,

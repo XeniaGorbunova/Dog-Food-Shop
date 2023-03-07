@@ -9,7 +9,7 @@ import {
   changeIsPickProduct, productDecrement, productIncrement,
 } from '../../redux/slices/cartSlice'
 import minus from '../../assets/minus.svg'
-// import plus from '/Users/Паша/Desktop/Проги/Сберуниверситет/Projects/dog-food/src/assets/plus.svg'
+import plus from '../../assets/plus.svg'
 import DeleteItemModal from './DeleteItemModal'
 
 function CartItem({
@@ -77,9 +77,8 @@ function CartItem({
             </button>
 
             <h4 data-label="notNavigate">{count}</h4>
-            <button type="button" className="number-plus__icon btn btn-light" onClick={incrementCountHandler} data-label="notNavigate">
-              {/* <img src={plus} alt="plus" data-label="notNavigate" className="number__icon" /> */}
-              {/* <Plus className="number__icon" /> */}
+            <button type="button" className="btn btn-light" onClick={incrementCountHandler} data-label="notNavigate">
+              <img src={plus} alt="plus" data-label="notNavigate" className="number__icon" />
             </button>
           </div>
           <button type="button" data-label="notNavigate" className="btn btn-primary" onClick={openDeleteModalHandler}>Удалить</button>

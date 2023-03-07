@@ -26,7 +26,7 @@ function UserPage() {
   const [isAvatarEditing, setIsAvatarEditing] = useState(false)
   useEffect(() => {
     if (!userToken) {
-      navigate('/signin')
+      navigate('/Dog-Food-Shop/signin')
     }
   }, [userToken])
 

@@ -37,7 +37,7 @@ function DetailPage() {
   const cartProducts = useSelector(getAllCartProductsSelector)
   useEffect(() => {
     if (!userToken) {
-      navigate('/signin')
+      navigate('/Dog-Food-Shop/signin')
     }
   }, [userToken])
 

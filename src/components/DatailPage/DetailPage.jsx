@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable max-len */
@@ -12,10 +13,6 @@ import { getQueryProductKey } from '../Products/utils'
 import { getTokenSelector, getUserSelector } from '../../redux/slices/userSlice'
 import Loader from '../Loader/Loader'
 import { addFavorite, getAllFavoriteProductsSelector, removeFavorite } from '../../redux/slices/favoriteSlice'
-import smallHeart from '../../assets/smallHeart.svg'
-import redHeart from '../../assets/redHeart.svg'
-import done from '../../assets/done.svg'
-import cart from '../../assets/cart.svg'
 import pen from '../../assets/pen.svg'
 import trash from '../../assets/trash.svg'
 import { addNewProduct, deleteProduct, getAllCartProductsSelector } from '../../redux/slices/cartSlice'
@@ -73,20 +70,18 @@ function DetailPage() {
             {data.name}
           </h5>
           {favorites.includes(id) && (
-            <img
-              src={redHeart}
-              className="card__icon-favorite"
-              alt="favorite"
-              onClick={() => { dispatch(removeFavorite(id)) }}
-            />
+          <button
+            type="button"
+            className="heart__icon-red btn btn-light"
+            onClick={() => { dispatch(removeFavorite(id)) }}
+          />
           )}
           {!favorites.includes(id) && (
-            <img
-              src={smallHeart}
-              className="card__icon-favorite"
-              alt="not favorite"
-              onClick={() => { dispatch(addFavorite(id)) }}
-            />
+          <button
+            type="button"
+            className="heart__icon-black btn btn-light"
+            onClick={() => { dispatch(addFavorite(id)) }}
+          />
           )}
           <div className="card-body">
             <div className="d-flex flex-row gap-2">
@@ -158,15 +153,9 @@ function DetailPage() {
                 whileTap={{
                   scale: 0.9,
                 }}
-                className="btn btn-primary"
+                className={isInCart(id) ? 'button__cart-done btn btn-primary' : 'button__cart-cart btn btn-primary'}
                 onClick={isInCart(id) ? removeFromCartHandler : moveToCartHandler}
-              >
-                {isInCart(id) ? (
-                  <img className="card__icon" src={done} alt="done" />
-                ) : (
-                  <img className="card__icon" src={cart} alt="cart" />
-                )}
-              </motion.button>
+              />
             </div>
           </div>
           {/* <SuccessModal

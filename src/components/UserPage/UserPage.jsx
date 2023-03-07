@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable max-len */
@@ -12,10 +13,11 @@ import { UserEditValidationSchema } from '../../validator'
 import '../../index.css'
 import { DogFoodApiConst } from '../../api/DogFoodapi'
 import Loader from '../Loader/Loader'
-import pen from '../../assets/pen.svg'
+// import pen from '../../assets/pen.svg'
 import { getQueryUserKey } from '../Products/utils'
 import { getTokenSelector, getUserSelector } from '../../redux/slices/userSlice'
 import EditAvatarForm from './EditAvatarForm'
+import './UserPage.css'
 
 function UserPage() {
   const navigate = useNavigate()
@@ -71,14 +73,13 @@ function UserPage() {
         />
         )}
         <img className="card-img-top" src={data.avatar} alt="user" />
-        <img
-          src={pen}
-          alt="edit"
-          style={{
-            position: 'absolute', top: '15px', right: '15px', cursor: 'pointer', width: '25px', height: '25px',
-          }}
+
+        <button
+          className="button__edit btn btn-light"
+          type="button"
           onClick={handleAvatarEdit}
         />
+
         <div className="card-body">
           <Formik
             initialValues={initialValues}

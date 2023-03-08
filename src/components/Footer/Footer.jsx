@@ -27,7 +27,7 @@ function Footer() {
         <img src={dog} alt="" />
       </Link>
       <h1>Dog Food</h1>
-      <span>
+      <span style={{ visibility: userToken ? 'visible' : 'hidden' }}>
         <button className="btn mx-2" type="button" onClick={handleAddModalOpen}>Добавить товар</button>
         <NavLink to="/products" className={({ isActive }) => (isActive ? 'btn mx-1 btn-info' : 'btn mx-1 btn-primary')}>
           Каталог

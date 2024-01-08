@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
-  RouterProvider,
+  RouterProvider, useNavigate,
 } from 'react-router-dom'
 import { Provider } from 'react-redux/es/exports'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -19,7 +19,16 @@ import { PageNotFound } from './components/PageNotFound/PageNotFound'
 import DetailPage from './components/DatailPage/DetailPage'
 import UserPage from './components/UserPage/UserPage'
 import FavoritesPage from './components/Favorites/Favorites'
-// import App from './App'
+
+function Redirect({ to }) {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate(to)
+  }, [navigate, to])
+
+  return null
+}
 
 const router = createBrowserRouter([
   {
@@ -28,6 +37,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Redirect to="/Dog-Food-Shop" />,
+      },
+      {
+        path: '/Dog-Food-Shop',
         element: <Main />,
       },
       {
@@ -64,7 +77,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-], { basename: '/Dog-Food-Shop' })
+])
 
 const queryClient = new QueryClient({
   defaultOptions: {
